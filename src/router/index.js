@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import PostsManager from '@/components/PostsManager'
+import BikeShareManager from '@/components/BikeShareManager'
 import Auth from '@okta/okta-vue'
 
 Vue.use(Auth, {
@@ -27,8 +27,8 @@ let router = new Router({
     },
     {
       path: '/posts-manager',
-      name: 'PostsManager',
-      component: PostsManager,
+      name: 'BikeShareManager',
+      component: BikeShareManager,
       meta: {
         requiresAuth: true
       }

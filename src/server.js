@@ -54,11 +54,12 @@ let database = new Sequelize({
 //     console.error('Unable to connect to the database:', err);
 //   });
 
-// Define our Post model
+// Define our Share model
 // id, createdAt, and updatedAt are added by sequelize automatically
-let Post = database.define('posts', {
-  title: Sequelize.STRING,
-  body: Sequelize.TEXT
+let Share = database.define('shares', {
+  costToRent: Sequelize.INTEGER,
+  shortDescription: Sequelize.STRING,
+  longDescription: Sequelize.TEXT
 })
 
 // Initialize epilogue
@@ -67,10 +68,10 @@ epilogue.initialize({
   sequelize: database
 })
 
-// Create the dynamic REST resource for our Post model
+// Create the dynamic REST resource for our Share model
 let userResource = epilogue.resource({
-  model: Post,
-  endpoints: ['/posts', '/posts/:id']
+  model: Share,
+  endpoints: ['/shares', '/shares/:id']
 })
 
 // Resets the database and launches the express app on :8081
