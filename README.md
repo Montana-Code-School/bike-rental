@@ -22,6 +22,14 @@ npm run unit
 
 # run all tests
 npm test
+
+# Test Your Vue.js + Node CRUD App
+Make sure both the server and frontend are running.
+Terminal #1
+npm run server
+Terminal #2
+npm run dev
+Navigate to http://localhost:8080 and give it a whirl.
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

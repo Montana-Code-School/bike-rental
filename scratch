@@ -1,0 +1,10 @@
+sub domain:
+dev-595847.oktapreview.com
+
+client id:
+0oafsc1rp991wJMJ90h7
+
+took out of package.json (for now):
+ "start": "npm run dev",
+when pushing up to heroku it will always run "npm run start" - make this a
+production server
