@@ -33,9 +33,8 @@ app.use((req, res, next) => {
     .catch(next) // jwt did not verify!
 })
 
-// For ease of this tutorial, we are going to use SQLite to limit dependencies
 let database = new Sequelize({
-  host: 'localhost:5432',
+  host: 'localhost',
   dialect: 'postgres',
   operatorsAliases: false,
 
@@ -45,6 +44,15 @@ let database = new Sequelize({
     idle: 10000
   }
 })
+
+// database
+//   .authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
 
 // Define our Post model
 // id, createdAt, and updatedAt are added by sequelize automatically
