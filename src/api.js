@@ -21,19 +21,19 @@ export default {
       return req.data
     })
   },
-  getPosts () {
-    return this.execute('get', '/posts')
+  getShares () {
+    return this.execute('get', '/shares')
   },
-  getPost (id) {
-    return this.execute('get', `/posts/${id}`)
+  getShare (id) {
+    return this.execute('get', `/shares/${id}`)
   },
-  createPost (data) {
-    return this.execute('post', '/posts', data)
+  createShare (data) {
+    return this.execute('post', '/shares', data)
   },
-  updatePost (id, data) {
-    return this.execute('put', `/posts/${id}`, data)
+  updateShare (id, data) {
+    return this.execute('put', `/shares/${id}`, data)
   },
-  deletePost (id) {
-    return this.execute('delete', `/posts/${id}`)
+  deleteShare (id) {
+    return this.execute('delete', `/shares/${id}`)
   }
 }

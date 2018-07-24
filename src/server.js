@@ -33,7 +33,6 @@ app.use((req, res, next) => {
     .catch(next) // jwt did not verify!
 })
 
-// For ease of this tutorial, we are going to use SQLite to limit dependencies
 let database = new Sequelize({
   host: 'localhost',
   dialect: 'postgres',
@@ -46,11 +45,21 @@ let database = new Sequelize({
   }
 })
 
-// Define our Post model
+// database
+//   .authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
+
+// Define our Share model
 // id, createdAt, and updatedAt are added by sequelize automatically
-let Post = database.define('posts', {
-  title: Sequelize.STRING,
-  body: Sequelize.TEXT
+let Share = database.define('shares', {
+  costToRent: Sequelize.INTEGER,
+  shortDescription: Sequelize.STRING,
+  longDescription: Sequelize.TEXT
 })
 
 // Initialize epilogue
@@ -59,10 +68,10 @@ epilogue.initialize({
   sequelize: database
 })
 
-// Create the dynamic REST resource for our Post model
+// Create the dynamic REST resource for our Share model
 let userResource = epilogue.resource({
-  model: Post,
-  endpoints: ['/posts', '/posts/:id']
+  model: Share,
+  endpoints: ['/shares', '/shares/:id']
 })
 
 // Resets the database and launches the express app on :8081
