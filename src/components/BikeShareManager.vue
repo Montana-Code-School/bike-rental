@@ -31,10 +31,22 @@
             </tr>
           </tbody>
         </table>
+        <p id="b64"></p>
+        <img id="img" height="150">
       </b-col>
       <b-col lg="3">
         <b-card :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
           <form @submit.prevent="saveShare">
+            <div>
+                <label for="name">Display name:</label>
+                <input type="text" id="name" name="name"/>
+            </div>
+            <div>
+                <label for="avatar">Profile picture:</label>
+                <input type="file"
+                id="avatar" name="avatar"
+                accept="image/png, image/jpeg" />
+            </div>
             <b-form-group label="Short Description">
               <b-form-input type="text" v-model="model.shortDescription"></b-form-input>
             </b-form-group>
@@ -62,6 +74,19 @@
               <b-btn type="submit" variant="success">Save Bike Data</b-btn>
             </div>
           </form>
+          <fieldset>
+          <legend>Bike Profile Picture</legend>
+          <div>
+              <label for="name">Display name:</label>
+              <input type="text" id="name" name="name"/>
+          </div>
+          <div>
+              <label for="avatar">Bike Picture:</label>
+              <input type="file" @change = "readFile1"
+                     id="avatar" name="avatar"
+                     accept="image/png, image/jpeg" />
+          </div>
+          </fieldset>
         </b-card>
       </b-col>
     </b-row>
@@ -134,6 +159,14 @@ export default {
           this.errors.zipcode = 'Try again'
         }
       }
+    },
+    readFile1 (e) {
+        var FR= new FileReader();
+        FR.addEventListener("load", (evt) => {
+          document.getElementById("img").src       = evt.target.result;
+          document.getElementById("b64").innerHTML = evt.target.result;
+        });
+        FR.readAsDataURL( e.target.files[0] );
     }
   }
 }

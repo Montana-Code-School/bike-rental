@@ -26,7 +26,7 @@ let router = new Router({
       component: Auth.handleCallback()
     },
     {
-      path: '/posts-manager',
+      path: '/shares',
       name: 'BikeShareManager',
       component: BikeShareManager,
       meta: {
