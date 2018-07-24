@@ -60,7 +60,9 @@ let Share = database.define('shares', {
   costToRent: Sequelize.INTEGER,
   shortDescription: Sequelize.STRING,
   longDescription: Sequelize.TEXT,
-  bikeType: Sequelize.STRING
+  bikeType: Sequelize.STRING,
+  address: Sequelize.STRING,
+  zipcode: Sequelize.INTEGER
 })
 
 // Initialize epilogue
