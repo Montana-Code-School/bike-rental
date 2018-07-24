@@ -10,6 +10,9 @@
               <th>Short Description</th>
               <th>Cost to Rent</th>
               <th>Updated At</th>
+              <th>Bike Type</th>
+              <th>Address</th>
+              <th>Zip Code</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -18,6 +21,9 @@
               <td>{{ share.shortDescription }}</td>
               <td>{{ share.costToRent }}</td>
               <td>{{ share.updatedAt }}</td>
+              <td>{{ share.bikeType }}</td>
+              <td>{{ share.address }}</td>
+              <td>{{ share.zipcode }}</td>
               <td class="text-right">
                 <a href="#" @click.prevent="populateShareToEdit(share)">Edit</a> -
                 <a href="#" @click.prevent="deleteShare(share.id)">Delete</a>
@@ -35,9 +41,23 @@
             <b-form-group label="Long Description">
               <b-form-textarea rows="4" v-model="model.longDescription"></b-form-textarea>
             </b-form-group>
+            <b-form-group label="Bike Type">
+              <b-form-select v-model="model.bikeType" :options="options" class="mb-3" />
+              <div>Selected: <strong>{{ model.bikeType }}</strong></div>
+            </b-form-group>
             <b-form-group label="Cost To Rent">
               <b-form-input type="number" v-model="model.costToRent"></b-form-input>
             </b-form-group>
+            <b-form-group label="Street Address in Missoula">
+              <b-form-input type="text" v-model="model.address"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Zip Code in Missoula">
+              <b-form-input type="number" v-model="model.zipcode"></b-form-input>
+              <div>
+                {{ errors.zipcode }}
+              </div>
+            </b-form-group>
+
             <div>
               <b-btn type="submit" variant="success">Save Bike Data</b-btn>
             </div>
@@ -55,7 +75,23 @@ export default {
     return {
       loading: false,
       shares: [],
-      model: {}
+      selected: null,
+      options: [
+        {value: 'Cruiser', text: 'Cruiser'},
+        {value: 'Fat Tire Bike', text: 'Fat Tire Bike'},
+        {value: 'Mountain Bike', text: 'Mountain Bike'},
+        {value: 'Road Bike', text: 'Road Bike'},
+        {value: 'Single Speed', text: 'Single Speed'},
+        {value: 'Tandem', text: 'Tandem'},
+        {value: 'Tricycle', text: 'Tricycle'},
+        {value: 'Unicycle', text: 'Unicycle'},
+        {value: 'Other', text: 'Other'}
+      ],
+      errors: {
+        zipcode: ''
+      },
+      model: {},
+      validZipCodes: [59801, 59802, 59803, 59804, 59806, 59807, 59808, 59812]
     }
   },
   async created () {
@@ -87,6 +123,16 @@ export default {
         }
         await api.deleteShare(id)
         await this.refreshShares()
+      }
+    },
+    checkZipCode (zipcode) {
+      if (zipcode === null || typeof zipcode === 'undefined') {
+        return false
+      } else {
+        zipcode = zipcode.toString()
+        if (zipcode.length !== 5) {
+          this.errors.zipcode = 'Try again'
+        }
       }
     }
   }

@@ -27,6 +27,8 @@ npm test
 Make sure both the server and frontend are running.
 Terminal #1
 npm run server
+Make sure you have PostgreSQL running or your terminal will fail.
+
 Terminal #2
 npm run dev
 Navigate to http://localhost:8080 and give it a whirl.
