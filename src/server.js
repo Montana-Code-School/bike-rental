@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // For ease of this tutorial, we are going to use SQLite to limit dependencies
 let database = new Sequelize({
-  host: 'localhost:5432',
+  host: 'localhost',
   dialect: 'postgres',
   operatorsAliases: false,
 
