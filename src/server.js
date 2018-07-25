@@ -64,8 +64,8 @@ let Share = database.define('shares', {
   bikeType: Sequelize.STRING,
   address: Sequelize.STRING,
   zipcode: Sequelize.INTEGER,
-  startDate: Sequelize.DATE,
-  endDate: Sequelize.DATE
+  dateOne: Sequelize.DATE,
+  dateTwo: Sequelize.DATE
 })
 
 // Initialize epilogue
