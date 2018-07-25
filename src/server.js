@@ -58,11 +58,14 @@ let database = new Sequelize({
 // id, createdAt, and updatedAt are added by sequelize automatically
 let Share = database.define('shares', {
   costToRent: Sequelize.INTEGER,
+  uploadedPicture: Sequelize.TEXT,
   shortDescription: Sequelize.STRING,
   longDescription: Sequelize.TEXT,
   bikeType: Sequelize.STRING,
   address: Sequelize.STRING,
-  zipcode: Sequelize.INTEGER
+  zipcode: Sequelize.INTEGER,
+  startDate: Sequelize.DATE,
+  endDate: Sequelize.DATE
 })
 
 // Initialize epilogue

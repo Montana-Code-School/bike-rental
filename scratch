@@ -8,3 +8,24 @@ took out of package.json (for now):
  "start": "npm run dev",
 when pushing up to heroku it will always run "npm run start" - make this a
 production server
+
+
+checkZipCode (zipcode) {
+  if (zipcode === null || typeof zipcode === 'undefined') {
+    return false
+  } else {
+    zipcode = zipcode.toString()
+    if (zipcode.length !== 5) {
+      this.errors.zipcode = 'Try again'
+    }
+  }
+},
+
+
+<!-- <b-form-input type="number" v-model="model.zipcode"></b-form-input>
+<div>
+  {{ errors.zipcode }}
+</div> -->
+<!-- <b-form-input v-model="model.zipCode"
+:class="{correct: $v.zipCode.withParams, error: $v.zipCode.errors}"
+placeholder="Zip Code"></b-form-input> -->

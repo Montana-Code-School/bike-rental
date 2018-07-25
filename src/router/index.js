@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
 import Auth from '@okta/okta-vue'
+import BikeListing from '@/components/Listing'
 
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
@@ -32,7 +33,16 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/listings',
+      name: 'BikeListing',
+      component: BikeListing,
+      meta: {
+        requiresAuth: true
+      }
     }
+
   ]
 })
 
