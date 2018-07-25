@@ -27,7 +27,7 @@
               <td>{{ share.bikeType }}</td>
               <td>{{ share.address }}</td>
               <td>{{ share.zipCode }}</td>
-              <td>{{ share.dates }}</td>
+              <td>{{ share.dateOne }} - {{ share.dateTwo }} </td>
               <td class="text-right">
                 <a href="#" @click.prevent="populateShareToEdit(share)">Edit</a> -
                 <a href="#" @click.prevent="deleteShare(share.id)">Delete</a>
@@ -40,7 +40,7 @@
       </b-col>
       <b-col lg="3">
         <b-card :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
-        <b-form-group v-model="model.dates">
+        <b-form-group>
           <div class="datepicker-trigger">Available Dates
             <input
               type="text"
@@ -50,12 +50,13 @@
             >
             <AirbnbStyleDatepicker
               :trigger-element-id="'datepicker-trigger'"
+              :disabled-dates="['', '']"
               :mode="'range'"
               :fullscreen-mobile="true"
               :date-one="dateOne"
               :date-two="dateTwo"
-              @date-one-selected="val => { dateOne = val }"
-              @date-two-selected="val => { dateTwo = val }"
+              @date-one-selected="val => { dateOne = val, model.dateOne = val }"
+              @date-two-selected="val => { dateTwo = val, model.dateTwo = val }"
             />
           </div>
         </b-form-group>
