@@ -18,8 +18,24 @@ export default {
         Authorization: `Bearer ${accessToken}`
       }
     }).then(req => {
+      console.log(req.data)
       return req.data
     })
+  },
+  getSharesByBikeType (bikeType, dateOne, dateTwo) {
+    console.log("it's working?")
+    let url = ''
+    if (bikeType && dateOne && dateTwo) {
+      url = `/shares?bikeType=${bikeType}&dateOne=${dateOne}&dateTwo=${dateTwo}`
+      console.log("date1", dateOne, "date2", dateTwo)
+    } else if (dateOne && dateTwo) {
+      url = `/shares?dateOne=${dateOne}&dateTwo=${dateTwo}`
+    } else if (bikeType) {
+      url = `/shares?bikeType=${bikeType}`
+    } else {
+      url = `/shares`
+    } return this.execute('get', url)
+    // http://localhost:8081/shares?sort=-bikeType
   },
   getShares () {
     return this.execute('get', '/shares')

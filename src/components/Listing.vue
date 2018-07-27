@@ -1,46 +1,55 @@
 <template>
   <div class="container-fluid mt-4">
     <h1 class="h1 text-center">Find Your Ride!</h1>
-    <tbody>
-    <tr v-for="share in shares" :key="share.id">
-      <td>{{ share.bikeType }}</td>
-      <td>{{ share.dateOne }} - {{ share.dateTwo }} </td>
-    </tr>
-    </tbody>
+      <tbody>
+        <tr
+          v-for="share in shares"
+          :key="share.id"
+        >
+          <td>{{ share.bikeType }}</td>
+          <td>{{ share.dateOne }} - {{ share.dateTwo }}</td>
+        </tr>
+      </tbody>
     <b-jumbotron class="center-block">
-    <b-col lg="3">
-    <form @click.prevent="getShares">
-    <b-form-group>
-    <div class="datepicker-trigger">Pick your dates
-    <br>
-      <input
-        type="text"
-        id="datepicker-trigger"
-        placeholder=" Select dates"
-        :value="formatDates(dateOne, dateTwo)"
-      >
-      <AirbnbStyleDatepicker
-        :trigger-element-id="'datepicker-trigger'"
-        :mode="'range'"
-        :fullscreen-mobile="true"
-        :date-one="dateOne"
-        :date-two="dateTwo"
-        @date-one-selected="val => { dateOne = val,model.dateOne = val }"
-        @date-two-selected="val => { dateTwo = val, model.dateTwo = val }"
-      />
-    </div>
-  </b-form-group>
-  <b-form-group label="Bike Type">
-    <b-form-select v-model="model.bikeType" :options="options" class="mb-3" />
-  </b-form-group>
-  <b-btn type="submit" variant="success">Find Your Bike</b-btn>
-  </form>
+      <b-col lg="3">
+        <form @submit.prevent="getSharesByBikeType">
+          <b-form-group>
+          <div class="datepicker-trigger">Pick your dates
+          <br>
+            <input
+              type="text"
+              id="datepicker-trigger"
+              placeholder=" Select dates"
+              :value="formatDates(dateOne, dateTwo)"
+            >
+            <AirbnbStyleDatepicker
+              :trigger-element-id="'datepicker-trigger'"
+              :mode="'range'"
+              :fullscreen-mobile="true"
+              :date-one="dateOne"
+              :date-two="dateTwo"
+              @date-one-selected="val => { dateOne = val,model.dateOne = this.formatDatesForDb(val) }"
+              @date-two-selected="val => { dateTwo = val, model.dateTwo = this.formatDatesForDb(val) }"
+            />
+          </div>
+        </b-form-group>
+          <b-form-group label="Bike Type">
+            <b-form-select
+            v-model="model.bikeType"
+            :options="options"
+            class="mb-3"
+            />
+          </b-form-group>
+      <b-btn
+        type="submit"
+        variant="success">Find Your Bike
+      </b-btn>
+    </form>
   </b-col>
 </b-jumbotron>
-<ul>
-  <li v-for="type in options">{{type.value}}</li>
-  <li v-for="item in working(type)">{{ item }}</li>
-</ul>
+  <ul>
+    <!-- <li v-for="type in options">{{type.value}}</li> -->
+  </ul>
   </div>
 </template>
 
@@ -72,6 +81,10 @@ export default {
     }
   },
   methods: {
+    async getSharesByBikeType () {
+      console.log(this.model)
+      await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
+    },
     async refreshShares () {
       this.loading = true
       this.shares = await api.getShares()
@@ -80,15 +93,15 @@ export default {
     async populateShareToEdit (share) {
       this.model = Object.assign({}, share)
     },
-    async getShares () {
-      if (this.model.bikeType) {
-        await api.getShares(this.model.bikeType)
+    async getShares (id) {
+      if (this.model.id) {
+        await api.getShares(this.model.id)
         return 'working'
       }
     },
-    getShare (id) {
-      return this.execute('get', `/shares/${id}`)
-    },
+    // getShare (id) {
+    //   return this.execute('get', `/shares/${id}`)
+    // },
     formatDates (dateOne, dateTwo) {
       let formattedDates = ''
       if (dateOne) {
@@ -99,9 +112,10 @@ export default {
       }
       return formattedDates
     },
-    working(type) {
-      return 'working'
+    formatDatesForDb (date) {
+      return new Date (date).toISOString()
     }
   }
 }
+// shares is the database so when we do shares.<>, we are trying to access that
 </script>

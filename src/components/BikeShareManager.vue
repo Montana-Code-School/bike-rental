@@ -160,13 +160,14 @@ export default {
       this.model = Object.assign({}, share)
     },
     async saveShare () {
-      if (this.model.id) {
-        await api.updateShare(this.model.id, this.model)
-      } else {
-        await api.createShare(this.model)
-      }
-      this.model = {} // reset form
-      await this.refreshShares()
+    console.log(this.model)
+      // if (this.model.id) {
+      //   await api.updateShare(this.model.id, this.model)
+      // } else {
+      //   await api.createShare(this.model)
+      // }
+      // this.model = {} // reset form
+      // await this.refreshShares()
     },
     async deleteShare (id) {
       if (confirm('Are you sure you want to delete this post?')) {
