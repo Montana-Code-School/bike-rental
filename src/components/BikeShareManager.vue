@@ -10,7 +10,6 @@
               <th>Short Description</th>
               <th>Uploaded Picture</th>
               <th>Cost to Rent</th>
-              <th>Updated At</th>
               <th>Bike Type</th>
               <th>Address</th>
               <th>Zip Code</th>
@@ -21,9 +20,8 @@
           <tbody>
             <tr v-for="share in shares" :key="share.id">
               <td>{{ share.shortDescription }}</td>
-              <td>{{ share.uploadedPicture }}</td>
+              <td><img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="20"/></td>
               <td>{{ share.costToRent }}</td>
-              <td>{{ share.updatedAt }}</td>
               <td>{{ share.bikeType }}</td>
               <td>{{ share.address }}</td>
               <td>{{ share.zipCode }}</td>
@@ -61,6 +59,7 @@
           </div>
         </b-form-group>
           <form @submit.prevent="saveShare">
+            <img id="img" :src="previewURL" alt="bike picture">
             <b-form-group label="Bike Picture">
             <div>
               <input type="file" @change = "readFile1"
@@ -116,6 +115,7 @@ export default {
       shares: [],
       selected: null,
       zipCode: '',
+      previewURL: null,
       options: [
         {value: 'Cruiser', text: 'Cruiser'},
         {value: 'Fat Tire', text: 'Fat Tire'},
@@ -158,6 +158,7 @@ export default {
     },
     async populateShareToEdit (share) {
       this.model = Object.assign({}, share)
+      this.previewURL = 'data:image/png;base64,' + share.uploadedPicture
     },
     async saveShare () {
       if (this.model.id) {
@@ -178,13 +179,15 @@ export default {
         await this.refreshShares()
       }
     },
-    readFile1 (e) {
+    readFile1 () {
+      if(!event.target.files.length) return;
       let FR = new FileReader()
-      FR.addEventListener('load', (evt) => {
-        document.getElementById('img').src = evt.target.result
-        document.getElementById('b64').innerHTML = evt.target.result
-      })
-      FR.readAsDataURL(e.target.files[0])
+      FR.onload = evt => {
+        this.previewURL = evt.target.result
+        let base64Str = evt.target.result.substr(evt.target.result.indexOf(",")+1, evt.target.result.length)
+        this.model.uploadedPicture = base64Str
+      }
+      FR.readAsDataURL(event.target.files[0])
     },
     formatDates (dateOne, dateTwo) {
       let formattedDates = ''
