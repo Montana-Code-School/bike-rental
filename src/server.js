@@ -77,7 +77,11 @@ epilogue.initialize({
 // Create the dynamic REST resource for our Share model
 let userResource = epilogue.resource({
   model: Share,
-  endpoints: ['/shares', '/shares/:id']
+  endpoints: ['/shares', '/shares/:id'],
+  sort: {
+    param: 'orderby',
+    attributes: [ 'bikeType' ]
+  }
 })
 
 // Resets the database and launches the express app on :8081
