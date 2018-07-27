@@ -1,15 +1,6 @@
 <template>
   <div class="container-fluid mt-4">
     <h1 class="h1 text-center">Find Your Ride!</h1>
-      <tbody>
-        <tr
-          v-for="share in shares"
-          :key="share.id"
-        >
-          <td>{{ share.bikeType }}</td>
-          <td>{{ share.dateOne }} - {{ share.dateTwo }}</td>
-        </tr>
-      </tbody>
     <b-jumbotron class="center-block">
       <b-col lg="3">
         <form @submit.prevent="getSharesByBikeType">
@@ -47,9 +38,15 @@
     </form>
   </b-col>
 </b-jumbotron>
-  <ul>
-    <!-- <li v-for="type in options">{{type.value}}</li> -->
-  </ul>
+  <div>
+    <b-card v-for="share in shares" :key="share.id" :title="share.shortDescription">
+      <p>
+        {{share.bikeType}}
+        {{share.longDescription}}
+      </p>
+      <b-button href="#" variant="primary">Reserve this bike</b-button>
+    </b-card>
+  </div>
   </div>
 </template>
 
@@ -64,8 +61,6 @@ export default {
       dateTwo: '',
       loading: false,
       shares: [],
-      selected: null,
-      zipCode: '',
       options: [
         {value: 'Cruiser', text: 'Cruiser'},
         {value: 'Fat Tire', text: 'Fat Tire'},
@@ -82,26 +77,8 @@ export default {
   },
   methods: {
     async getSharesByBikeType () {
-      console.log(this.model)
-      await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
+      this.shares = await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
     },
-    async refreshShares () {
-      this.loading = true
-      this.shares = await api.getShares()
-      this.loading = false
-    },
-    async populateShareToEdit (share) {
-      this.model = Object.assign({}, share)
-    },
-    async getShares (id) {
-      if (this.model.id) {
-        await api.getShares(this.model.id)
-        return 'working'
-      }
-    },
-    // getShare (id) {
-    //   return this.execute('get', `/shares/${id}`)
-    // },
     formatDates (dateOne, dateTwo) {
       let formattedDates = ''
       if (dateOne) {
@@ -113,7 +90,7 @@ export default {
       return formattedDates
     },
     formatDatesForDb (date) {
-      return new Date (date).toISOString()
+      return new Date(date).toISOString()
     }
   }
 }
