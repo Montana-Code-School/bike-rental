@@ -27,7 +27,7 @@
               <td>{{ share.bikeType }}</td>
               <td>{{ share.address }}</td>
               <td>{{ share.zipCode }}</td>
-              <td>{{ share.dateOne }} - {{ share.dateTwo }} </td>
+              <td>{{ share.dateOne }} - {{ share.dateTwo }}</td>
               <td class="text-right">
                 <a href="#" @click.prevent="populateShareToEdit(share)">Edit</a> -
                 <a href="#" @click.prevent="deleteShare(share.id)">Delete</a>
@@ -160,14 +160,13 @@ export default {
       this.model = Object.assign({}, share)
     },
     async saveShare () {
-    console.log(this.model)
-      // if (this.model.id) {
-      //   await api.updateShare(this.model.id, this.model)
-      // } else {
-      //   await api.createShare(this.model)
-      // }
-      // this.model = {} // reset form
-      // await this.refreshShares()
+      if (this.model.id) {
+        await api.updateShare(this.model.id, this.model)
+      } else {
+        await api.createShare(this.model)
+      }
+      this.model = {} // reset form
+      await this.refreshShares()
     },
     async deleteShare (id) {
       if (confirm('Are you sure you want to delete this post?')) {

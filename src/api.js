@@ -23,11 +23,10 @@ export default {
     })
   },
   getSharesByBikeType (bikeType, dateOne, dateTwo) {
-    console.log("it's working?")
     let url = ''
     if (bikeType && dateOne && dateTwo) {
       url = `/shares?bikeType=${bikeType}&dateOne=${dateOne}&dateTwo=${dateTwo}`
-      console.log("date1", dateOne, "date2", dateTwo)
+      console.log('date1', dateOne, 'date2', dateTwo)
     } else if (dateOne && dateTwo) {
       url = `/shares?dateOne=${dateOne}&dateTwo=${dateTwo}`
     } else if (bikeType) {
