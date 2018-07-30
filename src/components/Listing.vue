@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-4">
     <h1 class="h1 text-center">Find Your Ride!</h1>
-    <b-jumbotron class="center-block">
+    <b-jumbotron class="center-block" >
       <b-col lg="3">
         <form @submit.prevent="getSharesByBikeType">
           <b-form-group>
@@ -38,14 +38,25 @@
     </form>
   </b-col>
 </b-jumbotron>
-  <div>
-    <b-card v-for="share in shares" :key="share.id" :title="share.shortDescription">
-      <p>
-        {{share.bikeType}}
-        {{share.longDescription}}
+
+
+  <div class="search-container">
+    <b-card v-for="share in shares" :key="share.id" :title="share.shortDescription" class="search-item">
+      <div>
+      <p class="card-display">
+        <img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="100"/><br/><br/>
+        Bike Type: {{share.bikeType}}
       </p>
-      <b-button href="#" variant="primary">Reserve this bike</b-button>
+      <p>
+        {{share.longDescription}}<br/><br/>
+        Cost: ${{share.costToRent}}
+      </p>
+      </div>
+      <b-button v-b-modal.myModal href="#" variant="primary">Reserve this bike</b-button>
     </b-card>
+     <b-modal id="myModal" >
+       {{share.costToRent}}
+     </b-modal>
   </div>
   </div>
 </template>
@@ -62,6 +73,7 @@ export default {
       loading: false,
       shares: [],
       options: [
+        {value: '', text: ''},
         {value: 'Cruiser', text: 'Cruiser'},
         {value: 'Fat Tire', text: 'Fat Tire'},
         {value: 'Mountain', text: 'Mountain'},
@@ -94,5 +106,32 @@ export default {
     }
   }
 }
-// shares is the database so when we do shares.<>, we are trying to access that
+//change search box to be lined up side by side
 </script>
+
+<style>
+  .search-container {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    margin: 0 0.5rem;
+    flex-wrap: wrap;
+  }
+  .search-item {
+    width: 28%;
+    margin: 0.2rem;
+  }
+  .parent {
+    display: table;
+    width: 60%;
+  }
+  .search-box {
+    display: table-cell;
+}
+  .card-display {
+    align-items: center;
+    justify-content: center;
+  }
+
+
+</style>
