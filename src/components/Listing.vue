@@ -41,21 +41,44 @@
 
 
   <div class="search-container">
-    <b-card v-for="share in shares" :key="share.id" :title="share.shortDescription" class="search-item">
-      <div>
-      <p class="card-display">
-        <img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="100"/><br/><br/>
-        Bike Type: {{share.bikeType}}
-      </p>
-      <p>
-        {{share.longDescription}}<br/><br/>
-        Cost: ${{share.costToRent}}
-      </p>
-      </div>
-      <b-button v-b-modal.myModal href="#" variant="primary">Reserve this bike</b-button>
+    <b-card
+      v-for="share in shares"
+      :key="share.id"
+      :title="share.shortDescription"
+      class="search-item">
+        <div>
+          <p class="card-display">
+            <img
+              :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')"
+              height="100"/>
+              <br/>
+              <br/>
+              Bike Type: {{share.bikeType}}
+          </p>
+          <p>
+            {{share.longDescription}}<br/><br/>
+            Cost: ${{share.costToRent}}
+          </p>
+        </div>
+        <b-btn
+          v-b-modal.myModal
+          type="button"
+          @click="modalOutput(share)"
+          variant="primary">
+          Reserve this bike
+      </b-btn>
     </b-card>
-     <b-modal id="myModal" >
-       {{share.costToRent}}
+     <b-modal id="myModal">
+       <div>
+         <h1>{{this.filtered.shortDescription}}</h1><br/>
+       <img
+         :src="(this.filtered.uploadedPicture ? 'data:image/png;base64,' + this.filtered.uploadedPicture : '')"
+         height="100"/><br/><br/>
+       <h5>Type of bike:</h5> {{ this.filtered.bikeType }}<br/>
+       <h5>Description:</h5> {{this.filtered.longDescription}}<br/>
+       <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
+       <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
+     </div>
      </b-modal>
   </div>
   </div>
@@ -72,6 +95,7 @@ export default {
       dateTwo: '',
       loading: false,
       shares: [],
+      filtered: {},
       options: [
         {value: '', text: ''},
         {value: 'Cruiser', text: 'Cruiser'},
@@ -103,6 +127,9 @@ export default {
     },
     formatDatesForDb (date) {
       return new Date(date).toISOString()
+    },
+    modalOutput (share) {
+      this.filtered = share
     }
   }
 }
