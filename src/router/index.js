@@ -6,6 +6,7 @@ import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
 import BikeListing from '@/components/Listing'
 import NexmoTest from '@/components/NexmoTest'
+import Confirmation from '@/components/Confirmation'
 
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
@@ -15,6 +16,10 @@ Vue.use(Auth, {
 })
 
 Vue.use(Router)
+
+const User = {
+  props: ['id']
+}
 
 let router = new Router({
   mode: 'history',
@@ -48,6 +53,19 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/confirmation',
+      name: 'Confirmation',
+      component: Confirmation,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/confirmation/:id',
+      component: User,
+      props: true
     }
 
   ]
