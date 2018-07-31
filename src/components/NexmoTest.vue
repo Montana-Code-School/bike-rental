@@ -61,8 +61,9 @@ export default {
   methods: {
     async send() {
       console.log(this.data)
+      // sendSms can take any data object that looks like this:
+      // { number: 12345668, text: "some message"}
       const stuff = await api.sendSms(this.data)
-      console.log(stuff)
     }
   }
 }
