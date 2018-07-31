@@ -180,11 +180,11 @@ export default {
       }
     },
     readFile1 () {
-      if(!event.target.files.length) return;
+      if (!event.target.files.length) return
       let FR = new FileReader()
       FR.onload = evt => {
         this.previewURL = evt.target.result
-        let base64Str = evt.target.result.substr(evt.target.result.indexOf(",")+1, evt.target.result.length)
+        let base64Str = evt.target.result.substr(evt.target.result.indexOf(',') + 1, evt.target.result.length)
         this.model.uploadedPicture = base64Str
       }
       FR.readAsDataURL(event.target.files[0])
