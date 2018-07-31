@@ -39,7 +39,7 @@
   </b-col>
 </b-jumbotron>
 
-  <div class="search-container">
+    <b-card-group deck class="mb-3">
     <b-card
       v-for="share in shares"
       :key="share.id"
@@ -67,6 +67,7 @@
           Reserve this bike
       </b-btn>
     </b-card>
+  </b-card-group>
      <b-modal id="myModal" ref="myModalRef" hide-footer >
        <div>
          <h1>{{this.filtered.shortDescription}}</h1><br/>
@@ -113,9 +114,6 @@ export default {
     }
   },
   methods: {
-    passDown () {
-      console.log("working")
-    },
     hideModal () {
       this.$refs.myModalRef.hide()
     },

@@ -38,6 +38,7 @@ export default {
     return this.execute('get', '/shares')
   },
   getShare (id) {
+    console.log('test')
     return this.execute('get', `/shares/${id}`)
   },
   createShare (data) {

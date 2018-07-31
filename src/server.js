@@ -63,6 +63,7 @@ let Share = database.define('shares', {
   longDescription: Sequelize.TEXT,
   bikeType: Sequelize.STRING,
   address: Sequelize.STRING,
+  city: Sequelize.STRING,
   zipcode: Sequelize.INTEGER,
   dateOne: Sequelize.DATE,
   dateTwo: Sequelize.DATE

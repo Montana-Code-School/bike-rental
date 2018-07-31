@@ -12,6 +12,7 @@
               <th>Cost to Rent</th>
               <th>Bike Type</th>
               <th>Address</th>
+              <th>City</th>
               <th>Zip Code</th>
               <th>Available Dates</th>
               <th>&nbsp;</th>
@@ -80,9 +81,13 @@
             <b-form-group label="Cost To Rent">
               <b-form-input type="number" v-model="model.costToRent"></b-form-input>
             </b-form-group>
-            <b-form-group label="Street Address in Missoula">
+            <b-form-group label="Street Address in Missoula County">
               <b-form-input type="text" v-model="model.address" placeholder="Address"></b-form-input>
             </b-form-group>
+            <b-form-group label="City">
+              <b-form-input type="text" v-model="model.city" placeholder="City"></b-form-input>
+            </b-form-group>
+
             <b-form-group label="Zip Code in Missoula County">
 <!--
               <div class="form-group" :class="{ 'form-group--error': $v.zipCode.$error }">
