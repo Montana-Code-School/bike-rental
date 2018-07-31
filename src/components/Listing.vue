@@ -39,7 +39,6 @@
   </b-col>
 </b-jumbotron>
 
-
   <div class="search-container">
     <b-card
       v-for="share in shares"
@@ -133,7 +132,7 @@ export default {
     }
   }
 }
-//change search box to be lined up side by side
+// change search box to be lined up side by side
 </script>
 
 <style>
@@ -154,11 +153,9 @@ export default {
   }
   .search-box {
     display: table-cell;
-}
+  }
   .card-display {
     align-items: center;
     justify-content: center;
   }
-
-
 </style>
