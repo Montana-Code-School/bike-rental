@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Auth from '@okta/okta-vue'
+
 import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
-import Auth from '@okta/okta-vue'
 import BikeListing from '@/components/Listing'
+import NexmoTest from '@/components/NexmoTest'
 import Confirmation from '@/components/Confirmation'
 
 Vue.use(Auth, {
@@ -26,6 +28,11 @@ let router = new Router({
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/nexmo',
+      name: 'NexmoTest',
+      component: NexmoTest,
     },
     {
       path: '/implicit/callback',
