@@ -4,6 +4,13 @@ const bodyParser = require('body-parser')
 const Sequelize = require('sequelize')
 const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
+const Nexmo = require('nexmo')
+const { API_KEY, API_SECRET, NUMBER } = require('../config/dev.env')
+
+const nexmo = new Nexmo({
+  apiKey: API_KEY,
+  apiSecret: API_SECRET,
+}, {debug: true});
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: '0oafsc1rp991wJMJ90h7',
@@ -13,6 +20,23 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 let app = express()
 app.use(cors())
 app.use(bodyParser.json())
+
+app.post('/send-sms', (req, res) => {
+  console.log(req.body)
+  const toNumber = req.body.number;
+  const text = req.body.text;
+  nexmo.message.sendSms(
+    NUMBER, toNumber, text, {type: 'unicode'},
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(data);
+        // Optional: add socket.io -- will explain later
+      }
+    }
+  );
+});
 
 // verify JWT token middleware
 app.use((req, res, next) => {
