@@ -15,6 +15,10 @@ Vue.use(Auth, {
 
 Vue.use(Router)
 
+const User = {
+  props: ['id']
+}
+
 let router = new Router({
   mode: 'history',
   routes: [
@@ -50,6 +54,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/confirmation/:id',
+      component: User,
+      props: true
     }
 
   ]

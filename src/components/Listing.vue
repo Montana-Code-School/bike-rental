@@ -78,7 +78,7 @@
        <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
        <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
      </div>
-     <b-btn class="mt-3" variant="primary" @click="hideModal">Confirmation</b-btn>
+     <b-btn class="mt-3" variant="primary" :to="'/confirmation?id=' + this.filtered.id" @click="hideModal">Confirmation</b-btn>
      <b-btn class="mt-3" variant="outline-danger" @click="hideModal">Cancel</b-btn>
      </b-modal>
   </div>
@@ -113,6 +113,9 @@ export default {
     }
   },
   methods: {
+    passDown () {
+      console.log("working")
+    },
     hideModal () {
       this.$refs.myModalRef.hide()
     },
