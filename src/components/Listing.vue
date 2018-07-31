@@ -67,7 +67,7 @@
           Reserve this bike
       </b-btn>
     </b-card>
-     <b-modal id="myModal">
+     <b-modal id="myModal" ref="myModalRef" hide-footer >
        <div>
          <h1>{{this.filtered.shortDescription}}</h1><br/>
        <img
@@ -78,6 +78,8 @@
        <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
        <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
      </div>
+     <b-btn class="mt-3" variant="primary" @click="hideModal">Confirmation</b-btn>
+     <b-btn class="mt-3" variant="outline-danger" @click="hideModal">Cancel</b-btn>
      </b-modal>
   </div>
   </div>
@@ -111,6 +113,9 @@ export default {
     }
   },
   methods: {
+    hideModal () {
+      this.$refs.myModalRef.hide()
+    },
     async getSharesByBikeType () {
       this.shares = await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
     },
