@@ -78,6 +78,9 @@
        <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
        <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
      </div>
+      <form action="./Confirmation">
+          <input type="submit" value="Confirmation" />
+      </form>
      </b-modal>
   </div>
   </div>
@@ -111,6 +114,9 @@ export default {
     }
   },
   methods: {
+    hideModal () {
+      this.$refs.myModalRef.hide()
+    },
     async getSharesByBikeType () {
       this.shares = await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
     },

@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
 import Auth from '@okta/okta-vue'
 import BikeListing from '@/components/Listing'
+import Confirmation from '@/components/Confirmation'
 
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
@@ -38,6 +39,14 @@ let router = new Router({
       path: '/listings',
       name: 'BikeListing',
       component: BikeListing,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/confirmation',
+      name: 'Confirmation',
+      component: Confirmation,
       meta: {
         requiresAuth: true
       }
