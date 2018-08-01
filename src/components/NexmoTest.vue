@@ -2,13 +2,6 @@
   <div>
     <header> <h1>Text Anybody</h1></header>
     <section>
-
-      <!-- <form>
-        <input type="tel" name="number" placeholder="15551231234" required>
-        <input type="text" name="text" placeholder="Hello">
-        <input type="button" value="Send SMS">
-      </form> -->
-
       <p class="intro">Enter a number, begins with a country code</p>
       <form @submit.prevent="send">
         <b-container fluid>
@@ -59,10 +52,10 @@ export default {
   },
   methods: {
     async send () {
-      console.log(this.data)
       // sendSms can take any data object that looks like this:
       // { number: 12345668, text: "some message"}
-      await api.sendSms(this.data)
+      const res = await api.sendSms(this.data)
+      console.log(res)
     }
   }
 }
