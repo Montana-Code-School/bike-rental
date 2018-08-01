@@ -44,7 +44,7 @@ export default {
     return this.execute('post', '/shares', data)
   },
   updateShare (id, data) {
-    console.log("id", id)
+    console.log('id', id)
     return this.execute('put', `/shares/${id}`, data)
   },
   deleteShare (id) {
