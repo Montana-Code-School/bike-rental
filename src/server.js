@@ -5,17 +5,12 @@ const Sequelize = require('sequelize')
 const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 const Nexmo = require('nexmo')
-const config = require('../config/dev.env')
+const config = require('../config')
 
 const nexmo = new Nexmo({
   apiKey: config.API_KEY,
   apiSecret: config.API_SECRET
 }, {debug: true})
-
-// const nexmo = new Nexmo({
-//   apiKey: 'f3bb6359',
-//   apiSecret: 'WjcXpSuIJZnRNPn4'
-// }, {debug: true})
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: '0oafsc1rp991wJMJ90h7',
@@ -27,7 +22,6 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.post('/send-sms', (req, res) => {
-  console.log(req.body)
   const toNumber = req.body.number
   const text = req.body.text
   nexmo.message.sendSms(
