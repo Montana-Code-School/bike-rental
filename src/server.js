@@ -89,7 +89,9 @@ let Share = database.define('shares', {
   city: Sequelize.STRING,
   zipcode: Sequelize.INTEGER,
   dateOne: Sequelize.DATE,
-  dateTwo: Sequelize.DATE
+  dateTwo: Sequelize.DATE,
+  isRented: Sequelize.BOOLEAN,
+  isPaid: Sequelize.BOOLEAN
 })
 
 // Initialize epilogue
