@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Auth from '@okta/okta-vue'
+
 import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
-import Auth from '@okta/okta-vue'
+import BikeListing from '@/components/Listing'
+import NexmoTest from '@/components/NexmoTest'
+import Confirmation from '@/components/Confirmation'
 
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
@@ -13,6 +17,10 @@ Vue.use(Auth, {
 
 Vue.use(Router)
 
+const User = {
+  props: ['id']
+}
+
 let router = new Router({
   mode: 'history',
   routes: [
@@ -22,17 +30,44 @@ let router = new Router({
       component: Hello
     },
     {
+      path: '/nexmo',
+      name: 'NexmoTest',
+      component: NexmoTest
+    },
+    {
       path: '/implicit/callback',
       component: Auth.handleCallback()
     },
     {
-      path: '/posts-manager',
+      path: '/shares',
       name: 'BikeShareManager',
       component: BikeShareManager,
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/listings',
+      name: 'BikeListing',
+      component: BikeListing,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/confirmation',
+      name: 'Confirmation',
+      component: Confirmation,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/confirmation/:id',
+      component: User,
+      props: true
     }
+
   ]
 })
 

@@ -21,10 +21,24 @@ export default {
       return req.data
     })
   },
+  getSharesByBikeType (bikeType, dateOne, dateTwo) {
+    let url = ''
+    if (bikeType && dateOne && dateTwo) {
+      url = `/shares?bikeType=${bikeType}&dateOne=${dateOne}&dateTwo=${dateTwo}`
+    } else if (dateOne && dateTwo) {
+      url = `/shares?dateOne=${dateOne}&dateTwo=${dateTwo}`
+    } else if (bikeType) {
+      url = `/shares?bikeType=${bikeType}`
+    } else {
+      url = `/shares`
+    } return this.execute('get', url)
+    // http://localhost:8081/shares?sort=-bikeType
+  },
   getShares () {
     return this.execute('get', '/shares')
   },
   getShare (id) {
+    console.log('test')
     return this.execute('get', `/shares/${id}`)
   },
   createShare (data) {
@@ -35,5 +49,8 @@ export default {
   },
   deleteShare (id) {
     return this.execute('delete', `/shares/${id}`)
+  },
+  sendSms (data) {
+    return this.execute('post', `/send-sms`, data)
   }
 }

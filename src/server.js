@@ -4,6 +4,18 @@ const bodyParser = require('body-parser')
 const Sequelize = require('sequelize')
 const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
+const Nexmo = require('nexmo')
+const config = require('../config/dev.env')
+
+const nexmo = new Nexmo({
+  apiKey: config.API_KEY,
+  apiSecret: config.API_SECRET
+}, {debug: true})
+
+// const nexmo = new Nexmo({
+//   apiKey: 'f3bb6359',
+//   apiSecret: 'WjcXpSuIJZnRNPn4'
+// }, {debug: true})
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: '0oafsc1rp991wJMJ90h7',
@@ -13,6 +25,23 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 let app = express()
 app.use(cors())
 app.use(bodyParser.json())
+
+app.post('/send-sms', (req, res) => {
+  console.log(req.body)
+  const toNumber = req.body.number
+  const text = req.body.text
+  nexmo.message.sendSms(
+    config.NUMBER, toNumber, text, {type: 'unicode'},
+    (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(data)
+        // Optional: add socket.io -- will explain later
+      }
+    }
+  )
+})
 
 // verify JWT token middleware
 app.use((req, res, next) => {
@@ -58,8 +87,15 @@ let database = new Sequelize({
 // id, createdAt, and updatedAt are added by sequelize automatically
 let Share = database.define('shares', {
   costToRent: Sequelize.INTEGER,
+  uploadedPicture: Sequelize.TEXT,
   shortDescription: Sequelize.STRING,
-  longDescription: Sequelize.TEXT
+  longDescription: Sequelize.TEXT,
+  bikeType: Sequelize.STRING,
+  address: Sequelize.STRING,
+  city: Sequelize.STRING,
+  zipcode: Sequelize.INTEGER,
+  dateOne: Sequelize.DATE,
+  dateTwo: Sequelize.DATE
 })
 
 // Initialize epilogue
@@ -71,7 +107,11 @@ epilogue.initialize({
 // Create the dynamic REST resource for our Share model
 let userResource = epilogue.resource({
   model: Share,
-  endpoints: ['/shares', '/shares/:id']
+  endpoints: ['/shares', '/shares/:id'],
+  sort: {
+    param: 'orderby',
+    attributes: [ 'bikeType' ]
+  }
 })
 
 // Resets the database and launches the express app on :8081
