@@ -79,8 +79,31 @@
        <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
        <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
      </div>
-     <b-btn class="mt-3" variant="primary" :to="'/confirmation?id=' + this.filtered.id" @click="hideModal">Confirmation</b-btn>
-     <b-btn class="mt-3" variant="outline-danger" @click="hideModal">Cancel</b-btn>
+     <b-btn
+        class="mt-3"
+        variant="primary"
+        @click="toggleInput">Confirmation
+     </b-btn>
+     <b-btn
+      class="mt-3"
+      variant="outline-danger"
+      @click="hideModal">Cancel
+     </b-btn>
+     <div v-if="showCard">
+       <h5>Please give us your payment details:</h5>
+       <card class='stripe-card'
+         :class='{ complete }'
+         :stripe= 'stripeKey'
+         :options='stripeOptions'
+         @change='complete = $event.complete'
+       />
+       <b-btn
+         class='pay-with-stripe'
+         @click='pay'
+         :to="'/confirmation?id=' + this.filtered.id"
+         :disabled='!complete'>Pay with credit card
+      </b-btn>
+     </div>
      </b-modal>
   </div>
 </template>
@@ -88,6 +111,7 @@
 <script>
 import format from 'date-fns/format'
 import api from '@/api'
+import { Card, createToken } from 'vue-stripe-elements-plus'
 export default {
   data () {
     return {
@@ -95,6 +119,7 @@ export default {
       dateOne: '',
       dateTwo: '',
       loading: false,
+      showCard: false,
       shares: [],
       filtered: {},
       options: [
@@ -109,12 +134,29 @@ export default {
         {value: 'Unicycle', text: 'Unicycle'},
         {value: 'Other', text: 'Other'}
       ],
-      model: {}
+      model: {},
+      stripeKey: process.env.STRIPE_KEY,
+      complete: false,
+      stripeOptions: {
+        // see https://stripe.com/docs/stripe.js#element-options for details
+      }
     }
   },
+  components: { Card },
   methods: {
+    pay () {
+      // createToken returns a Promise which resolves in a result object with
+      // either a token or an error key.
+      // See https://stripe.com/docs/api#tokens for the token object.
+      // See https://stripe.com/docs/api#errors for the error object.
+      // More general https://stripe.com/docs/stripe.js#stripe-create-token.
+      createToken().then(data => console.log(data.token))
+    },
     hideModal () {
       this.$refs.myModalRef.hide()
+    },
+    toggleInput () {
+      this.showCard = !this.showCard
     },
     async getSharesByBikeType () {
       this.shares = await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
@@ -141,6 +183,13 @@ export default {
 </script>
 
 <style>
+  .stripe-card {
+    width: 300px;
+    border: 1px solid grey;
+  }
+  .stripe-card.complete {
+    border-color: green;
+  }
   .search-container {
     display: flex;
     /* align-items: center; */

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h3 class="my-3">Your bike is Confirmed</h3>
+  <h3 class="my-3">You're Almost There</h3>
   <b-card>
     <h1>{{this.share.shortDescription}}</h1>
     <img
