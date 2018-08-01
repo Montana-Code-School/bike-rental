@@ -32,7 +32,7 @@ let router = new Router({
     {
       path: '/nexmo',
       name: 'NexmoTest',
-      component: NexmoTest,
+      component: NexmoTest
     },
     {
       path: '/implicit/callback',

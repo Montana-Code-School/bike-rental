@@ -50,7 +50,7 @@ export default {
   deleteShare (id) {
     return this.execute('delete', `/shares/${id}`)
   },
-  sendSms(data) {
+  sendSms (data) {
     return this.execute('post', `/send-sms`, data)
   }
 }
