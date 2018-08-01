@@ -50,20 +50,19 @@
 
 <script>
 import api from '@/api'
-import nexmo from 'nexmo'
 
 export default {
   data () {
     return {
-      data: {},
+      data: {}
     }
   },
   methods: {
-    async send() {
+    async send () {
       console.log(this.data)
       // sendSms can take any data object that looks like this:
       // { number: 12345668, text: "some message"}
-      const stuff = await api.sendSms(this.data)
+      await api.sendSms(this.data)
     }
   }
 }

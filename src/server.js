@@ -5,12 +5,17 @@ const Sequelize = require('sequelize')
 const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 const Nexmo = require('nexmo')
-const { API_KEY, API_SECRET, NUMBER } = require('../config/dev.env')
+const config = require('../config/dev.env')
 
 const nexmo = new Nexmo({
-  apiKey: API_KEY,
-  apiSecret: API_SECRET,
-}, {debug: true});
+  apiKey: config.API_KEY,
+  apiSecret: config.API_SECRET
+}, {debug: true})
+
+// const nexmo = new Nexmo({
+//   apiKey: 'f3bb6359',
+//   apiSecret: 'WjcXpSuIJZnRNPn4'
+// }, {debug: true})
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: '0oafsc1rp991wJMJ90h7',
@@ -23,20 +28,20 @@ app.use(bodyParser.json())
 
 app.post('/send-sms', (req, res) => {
   console.log(req.body)
-  const toNumber = req.body.number;
-  const text = req.body.text;
+  const toNumber = req.body.number
+  const text = req.body.text
   nexmo.message.sendSms(
-    NUMBER, toNumber, text, {type: 'unicode'},
+    config.NUMBER, toNumber, text, {type: 'unicode'},
     (err, data) => {
       if (err) {
-        console.log(err);
+        console.log(err)
       } else {
-        res.send(data);
+        res.send(data)
         // Optional: add socket.io -- will explain later
       }
     }
-  );
-});
+  )
+})
 
 // verify JWT token middleware
 app.use((req, res, next) => {

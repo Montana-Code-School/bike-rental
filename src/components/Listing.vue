@@ -83,7 +83,6 @@
      <b-btn class="mt-3" variant="outline-danger" @click="hideModal">Cancel</b-btn>
      </b-modal>
   </div>
-  </div>
 </template>
 
 <script>
