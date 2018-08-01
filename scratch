@@ -29,3 +29,5 @@ checkZipCode (zipcode) {
 <!-- <b-form-input v-model="model.zipCode"
 :class="{correct: $v.zipCode.withParams, error: $v.zipCode.errors}"
 placeholder="Zip Code"></b-form-input> -->
+
+<b-btn class="mt-3" variant="primary" :to="'/confirmation?id=' + this.filtered.id" @click="hideModal">Confirmation</b-btn>
