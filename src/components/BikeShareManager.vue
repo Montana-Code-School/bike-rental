@@ -27,6 +27,7 @@
               <td>{{ share.address }}</td>
               <td>{{ share.zipCode }}</td>
               <td>{{ share.dateOne }} - {{ share.dateTwo }}</td>
+
               <td class="text-right">
                 <a href="#" @click.prevent="populateShareToEdit(share)">Edit</a> -
                 <a href="#" @click.prevent="deleteShare(share.id)">Delete</a>
@@ -169,6 +170,8 @@ export default {
       if (this.model.id) {
         await api.updateShare(this.model.id, this.model)
       } else {
+        this.model.isRented = false
+        this.model.isPaid = false
         await api.createShare(this.model)
       }
       this.model = {} // reset form

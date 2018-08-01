@@ -100,7 +100,6 @@
        <b-btn
          class='pay-with-stripe'
          @click='pay'
-         :to="'/confirmation?id=' + this.filtered.id"
          :disabled='!complete'>Pay with credit card
       </b-btn>
      </div>
@@ -144,13 +143,24 @@ export default {
   },
   components: { Card },
   methods: {
-    pay () {
+    async shareUpdate () {
+      await api.updateShare(this.filtered.isPaid, this.filtered.isRented)
+    },
+     pay () {
       // createToken returns a Promise which resolves in a result object with
       // either a token or an error key.
       // See https://stripe.com/docs/api#tokens for the token object.
       // See https://stripe.com/docs/api#errors for the error object.
       // More general https://stripe.com/docs/stripe.js#stripe-create-token.
-      createToken().then(data => console.log(data.token))
+        createToken().then(async (data) =>  {
+       if(data.token) {
+         this.filtered.isPaid = true
+         this.filtered.isRented = true
+         await api.updateShare(this.filtered.id, this.filtered)
+         this.$router.push('/confirmation?id=' + this.filtered.id)
+
+       }
+     })
     },
     hideModal () {
       this.$refs.myModalRef.hide()
@@ -159,6 +169,7 @@ export default {
       this.showCard = !this.showCard
     },
     async getSharesByBikeType () {
+
       this.shares = await api.getSharesByBikeType(this.model.bikeType, this.model.dateOne, this.model.dateTwo)
     },
     formatDates (dateOne, dateTwo) {

@@ -67,7 +67,16 @@ let router = new Router({
       path: '/confirmation/:id',
       component: User,
       props: true
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test,
+      meta: {
+        requiresAuth: true
+      }
     }
+
   ]
 })
 

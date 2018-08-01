@@ -30,7 +30,7 @@ export default {
     } else if (bikeType) {
       url = `/shares?bikeType=${bikeType}`
     } else {
-      url = `/shares`
+      url = `/shares?isPaid=false&isRented=false`
     } return this.execute('get', url)
     // http://localhost:8081/shares?sort=-bikeType
   },
@@ -38,13 +38,13 @@ export default {
     return this.execute('get', '/shares')
   },
   getShare (id) {
-    console.log('test')
     return this.execute('get', `/shares/${id}`)
   },
   createShare (data) {
     return this.execute('post', '/shares', data)
   },
   updateShare (id, data) {
+    console.log("id", id)
     return this.execute('put', `/shares/${id}`, data)
   },
   deleteShare (id) {
