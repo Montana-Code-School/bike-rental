@@ -1,51 +1,33 @@
-<template>
-  <div id='app'>
-    <h1>Please give us your payment details:</h1>
-    <card class='stripe-card'
-      :class='{ complete }'
-      :stripe= 'stripeKey'
-      :options='stripeOptions'
-      @change='complete = $event.complete'
-    />
-    <button class='pay-with-stripe' @click='pay' :disabled='!complete'>Pay with credit card</button>
-  </div>
+<!-- <template>
+  <map
+    :center="center"
+    :zoom="7"
+  >
+    <marker
+      v-for="m in markers"
+      :position.sync="m.position"
+      :clickable="true"
+      :draggable="true"
+      @g-click="center=m.position"
+    ></marker>
+  </map>
 </template>
 
 <script>
-import { Card, createToken } from 'vue-stripe-elements-plus'
+  import {load, Map, Marker} from 'vue-google-maps'
 
-export default {
-  data () {
-    return {
-      stripeKey: process.env.STRIPE_KEY,
-      complete: false,
-      stripeOptions: {
-        // see https://stripe.com/docs/stripe.js#element-options for details
+  load('YOUR_API_TOKEN','OPTIONAL VERSION NUMBER')
+
+  export default {
+    data () {
+      return {
+        center: {lat: 10.0, lng: 10.0},
+        markers: [{
+          position: {lat: 10.0, lng: 10.0}
+        }, {
+          position: {lat: 11.0, lng: 11.0}
+        }]
       }
     }
-  },
-
-  components: { Card },
-
-  methods: {
-    pay () {
-      // createToken returns a Promise which resolves in a result object with
-      // either a token or an error key.
-      // See https://stripe.com/docs/api#tokens for the token object.
-      // See https://stripe.com/docs/api#errors for the error object.
-      // More general https://stripe.com/docs/stripe.js#stripe-create-token.
-      createToken().then(data => console.log(data.token))
-    }
   }
-}
-</script>
-
-<style>
-.stripe-card {
-  width: 300px;
-  border: 1px solid grey;
-}
-.stripe-card.complete {
-  border-color: green;
-}
-</style>
+</script>  -->
