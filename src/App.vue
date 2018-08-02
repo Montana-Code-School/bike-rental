@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'app',
   data () {
@@ -29,7 +28,6 @@ export default {
     }
   },
   async created () {
-    console.log(process.env)
     await this.refreshActiveUser()
   },
   watch: {
