@@ -6,6 +6,7 @@ const epilogue = require('epilogue')
 const OktaJwtVerifier = require('@okta/jwt-verifier')
 const Nexmo = require('nexmo')
 const config = require('../config')
+const path = require('path')
 
 const nexmo = new Nexmo({
   apiKey: config.API_KEY,
@@ -18,6 +19,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 })
 
 let app = express()
+app.use(express.static(path.join(__dirname, 'dist')))
 app.use(cors())
 app.use(bodyParser.json())
 
