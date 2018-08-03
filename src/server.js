@@ -58,17 +58,18 @@ app.use((req, res, next) => {
     .catch(next) // jwt did not verify!
 })
 
-let database = new Sequelize({
-  host: 'localhost',
-  dialect: 'postgres',
-  operatorsAliases: false,
-
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  }
-})
+// let database = new Sequelize({
+//   host: 'localhost',
+//   dialect: 'postgres',
+//   operatorsAliases: false,
+//
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     idle: 10000
+//   }
+// })
+let database = new Sequelize(process.env.DATABASE_URL)
 
 // database
 //   .authenticate()
