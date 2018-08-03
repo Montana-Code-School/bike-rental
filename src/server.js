@@ -86,12 +86,18 @@ let Share = database.define('shares', {
   longDescription: Sequelize.TEXT,
   bikeType: Sequelize.STRING,
   address: Sequelize.STRING,
-  city: Sequelize.STRING,
-  zipcode: Sequelize.INTEGER,
+  lat: Sequelize.DECIMAL,
+  lng: Sequelize.DECIMAL,
   dateOne: Sequelize.DATE,
   dateTwo: Sequelize.DATE,
   isRented: Sequelize.BOOLEAN,
   isPaid: Sequelize.BOOLEAN
+})
+
+let oktaUser = database.define('bikes', {
+  userId: Sequelize.STRING,
+  ownedBikes: Sequelize.TEXT,
+  rentedBikes: Sequelize.TEXT
 })
 
 // Initialize epilogue
@@ -101,7 +107,7 @@ epilogue.initialize({
 })
 
 // Create the dynamic REST resource for our Share model
-let userResource = epilogue.resource({
+let shareResource = epilogue.resource({
   model: Share,
   endpoints: ['/shares', '/shares/:id'],
   sort: {

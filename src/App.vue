@@ -29,7 +29,6 @@ export default {
     }
   },
   async created () {
-    console.log(process.env)
     await this.refreshActiveUser()
   },
   watch: {
