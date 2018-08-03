@@ -10,7 +10,8 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
-    "server": "node ./src/server"
+    "server": "node ./src/server",
+    "start": "node ./src/server"
   },
   "dependencies": {
     "@okta/jwt-verifier": "0.0.11",
@@ -25,6 +26,7 @@
     "jquery": "^1.9.1",
     "nexmo": "^2.3.2",
     "nodemon": "^1.18.3",
+    "path": "^0.12.7",
     "pg": "^7.4.3",
     "sequelize": "^4.37.6",
     "sqlite3": "^4.0.2",
