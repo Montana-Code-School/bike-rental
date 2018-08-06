@@ -7,6 +7,7 @@ const OktaJwtVerifier = require('@okta/jwt-verifier')
 const Nexmo = require('nexmo')
 const config = require('../config')
 const path = require('path')
+const PORT = process.env.PORT || 8081
 
 const nexmo = new Nexmo({
   apiKey: config.API_KEY,
@@ -19,6 +20,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 })
 
 let app = express()
+let database
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(cors())
 app.use(bodyParser.json())
@@ -57,28 +59,29 @@ app.use((req, res, next) => {
     })
     .catch(next) // jwt did not verify!
 })
+if (process.env.DATABASE_URL) {
+  database = new Sequelize(process.env.DATABASE_URL)
+} else {
+  database = new Sequelize({
+    host: 'localhost',
+    dialect: 'postgres',
+    operatorsAliases: false,
 
-// let database = new Sequelize({
-//   host: 'localhost',
-//   dialect: 'postgres',
-//   operatorsAliases: false,
-//
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     idle: 10000
-//   }
-// })
-let database = new Sequelize(process.env.DATABASE_URL)
-
-// database
-//   .authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(err => {
-//     console.error('Unable to connect to the database:', err);
-//   });
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    }
+  })
+}
+database
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.')
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err)
+  })
 
 // Define our Share model
 // id, createdAt, and updatedAt are added by sequelize automatically
@@ -117,7 +120,7 @@ let userResource = epilogue.resource({
 database
   .sync({ force: true })
   .then(() => {
-    app.listen(8081, () => {
+    app.listen(PORT, () => {
       console.log('listening to port localhost:8081')
     })
   })
