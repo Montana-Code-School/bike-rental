@@ -24,9 +24,6 @@ let database
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use(cors())
 app.use(bodyParser.json())
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist'))
-})
 
 app.post('/send-sms', (req, res) => {
   const toNumber = req.body.number
@@ -61,6 +58,10 @@ app.use((req, res, next) => {
       next()
     })
     .catch(next) // jwt did not verify!
+})
+
+app.use('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist'))
 })
 
 if (process.env.DATABASE_URL) {
