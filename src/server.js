@@ -42,27 +42,41 @@ app.post('/send-sms', (req, res) => {
 })
 
 // verify JWT token middleware
-app.use((req, res, next) => {
-  // require every request to have an authorization header
-  if (!req.headers.authorization) {
-    return next(new Error('Authorization header is required'))
+const authRequired = () => {
+  return (req, res, next) => {
+    if (!req.headers.authorization) {
+      return next(new Error('Authorization header is required'))
+    }
+    let parts = req.headers.authorization.trim().split(' ')
+    let accessToken = parts.pop()
+    oktaJwtVerifier.verifyAccessToken(accessToken)
+      .then(jwt => {
+        req.user = {
+          uid: jwt.claims.uid,
+          email: jwt.claims.sub
+        }
+        next()
+      })
+      .catch(next) // jwt did not verify!
   }
-  let parts = req.headers.authorization.trim().split(' ')
-  let accessToken = parts.pop()
-  oktaJwtVerifier.verifyAccessToken(accessToken)
-    .then(jwt => {
-      req.user = {
-        uid: jwt.claims.uid,
-        email: jwt.claims.sub
-      }
-      next()
-    })
-    .catch(next) // jwt did not verify!
+}
+
+app.get('/hello', (req, res) => {
+  return res.json({
+    message: 'Hello world!'
+  })
 })
 
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist'))
+// route uses authRequired middleware to secure it
+app.get('/api', authRequired(), (req, res) => {
+  return res.json({
+    secret: 'The answer is always "A"!'
+  })
 })
+
+// app.use('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../dist'))
+// })
 
 if (process.env.DATABASE_URL) {
   database = new Sequelize(process.env.DATABASE_URL)
