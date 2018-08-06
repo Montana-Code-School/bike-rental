@@ -61,16 +61,16 @@ const authRequired = () => {
   }
 }
 
-app.get('/', (req, res) => {
+app.get('/', authRequired(), (req, res) => {
   return res.sendFile(path.join(__dirname, '../dist/index.html'))
 })
 
-// route uses authRequired middleware to secure it
-app.get('/api', authRequired(), (req, res) => {
-  return res.json({
-    secret: 'The answer is always "A"!'
-  })
-})
+// // route uses authRequired middleware to secure it
+// app.get('/api', authRequired(), (req, res) => {
+//   return res.json({
+//     secret: 'The answer is always "A"!'
+//   })
+// })
 
 // app.use('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../dist'))
