@@ -21,11 +21,11 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 
 let app = express()
 let database
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, '../dist')))
 app.use(cors())
 app.use(bodyParser.json())
 app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist'))
+  res.sendFile(path.join(__dirname, '../dist'))
 })
 
 app.post('/send-sms', (req, res) => {
