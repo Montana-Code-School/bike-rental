@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Auth from '@okta/okta-vue'
-
 import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
 import BikeListing from '@/components/Listing'
@@ -11,7 +10,7 @@ import Confirmation from '@/components/Confirmation'
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
   client_id: '0oafsc1rp991wJMJ90h7',
-  redirect_uri: 'https://radiant-hollows-28084.herokuapp.com/implicit/callback',
+  redirect_uri: window.location.origin + '/implicit/callback',
   scope: 'openid profile email'
 })
 
