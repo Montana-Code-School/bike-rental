@@ -10,7 +10,7 @@ import Confirmation from '@/components/Confirmation'
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
   client_id: '0oafsc1rp991wJMJ90h7',
-  redirect_uri: window.location.origin + '/implicit/callback',
+  redirect_uri: window.location.origin,
   scope: 'openid profile email'
 })
 
@@ -21,6 +21,7 @@ const User = {
 }
 
 let router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
