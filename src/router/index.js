@@ -7,7 +7,6 @@ import BikeShareManager from '@/components/BikeShareManager'
 import BikeListing from '@/components/Listing'
 import NexmoTest from '@/components/NexmoTest'
 import Confirmation from '@/components/Confirmation'
-import Test from '@/components/Test'
 
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
@@ -67,14 +66,6 @@ let router = new Router({
       path: '/confirmation/:id',
       component: User,
       props: true
-    },
-    {
-      path: '/test',
-      name: 'Test',
-      component: Test,
-      meta: {
-        requiresAuth: true
-      }
     }
 
   ]

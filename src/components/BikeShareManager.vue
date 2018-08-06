@@ -12,8 +12,6 @@
               <th>Cost to Rent</th>
               <th>Bike Type</th>
               <th>Address</th>
-              <th>City</th>
-              <th>Zip Code</th>
               <th>Available Dates</th>
               <th>&nbsp;</th>
             </tr>
@@ -25,9 +23,7 @@
               <td>{{ share.costToRent }}</td>
               <td>{{ share.bikeType }}</td>
               <td>{{ share.address }}</td>
-              <td>{{ share.zipCode }}</td>
               <td>{{ share.dateOne }} - {{ share.dateTwo }}</td>
-
               <td class="text-right">
                 <a href="#" @click.prevent="populateShareToEdit(share)">Edit</a> -
                 <a href="#" @click.prevent="deleteShare(share.id)">Delete</a>
@@ -35,8 +31,6 @@
             </tr>
           </tbody>
         </table>
-        <p id="b64"></p>
-        <img id="img" height="150">
       </b-col>
       <b-col lg="3">
         <b-card :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
@@ -83,19 +77,10 @@
               <b-form-input type="number" v-model="model.costToRent"></b-form-input>
             </b-form-group>
             <b-form-group label="Street Address in Missoula County">
-              <b-form-input type="text" v-model="model.address" placeholder="Address"></b-form-input>
-            </b-form-group>
-            <b-form-group label="City">
-              <b-form-input type="text" v-model="model.city" placeholder="City"></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Zip Code in Missoula County">
-<!--
-              <div class="form-group" :class="{ 'form-group--error': $v.zipCode.$error }">
-                  <b-form-input class="form__input" v-model.trim="$v.zipCode.$model"></b-form-input>
-                <div class="error" v-if="!$v.zipCode.required">Field is required</div>
-                <div class="error" v-if="!$v.zipCode.maxLength">Name must have at least {{$v.name.$params.maxLength.max}} numbers.</div>
-                </div> -->
+              <!-- <b-form-input type="text" v-model="model.address" placeholder="Address"></b-form-input> -->
+              <gmap-autocomplete class="form-control" v-model="model.address"
+                @place_changed="setPlace">
+              </gmap-autocomplete>
             </b-form-group>
             <div>
               <b-btn type="submit" variant="success">Save Bike Data</b-btn>
@@ -206,6 +191,11 @@ export default {
         formattedDates += ' - ' + format(dateTwo, this.dateFormat)
       }
       return formattedDates
+    },
+    setPlace (place) {
+      this.model.address = place.formatted_address
+      this.model.lat = place.geometry.location.lat()
+      this.model.lng = place.geometry.location.lng()
     }
   }
 }

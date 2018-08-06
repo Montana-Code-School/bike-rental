@@ -8,6 +8,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
 import 'vue-airbnb-style-datepicker/dist/styles.css'
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: process.env.GOOGLE_MAPS_KEY,
+    libraries: 'places'
+  }
+})
 
 Vue.use(AirbnbStyleDatepicker, {
   sundayFirst: false,
