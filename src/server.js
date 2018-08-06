@@ -61,10 +61,8 @@ const authRequired = () => {
   }
 }
 
-app.get('/hello', (req, res) => {
-  return res.json({
-    message: 'Hello world!'
-  })
+app.get('/', (req, res) => {
+  return res.sendFile(path.join(__dirname, '../dist'))
 })
 
 // route uses authRequired middleware to secure it
