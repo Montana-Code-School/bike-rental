@@ -62,6 +62,10 @@ let router = new Router({
       path: '/confirmation/:id',
       component: User,
       props: true
+    },
+    {
+      path: '/implicit/callback',
+      component: Auth.handleCallback()
     }
 
   ]
