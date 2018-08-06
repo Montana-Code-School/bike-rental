@@ -41,10 +41,7 @@ let router = new Router({
     {
       path: '/shares',
       name: 'BikeShareManager',
-      component: BikeShareManager,
-      meta: {
-        requiresAuth: true
-      }
+      component: BikeShareManager
     },
     {
       path: '/listings',
