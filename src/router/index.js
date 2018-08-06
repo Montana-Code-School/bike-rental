@@ -11,7 +11,7 @@ import Confirmation from '@/components/Confirmation'
 Vue.use(Auth, {
   issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
   client_id: '0oafsc1rp991wJMJ90h7',
-  redirect_uri: 'http://localhost:8080/implicit/callback',
+  redirect_uri: 'https://radiant-hollows-28084.herokuapp.com/implicit/callback',
   scope: 'openid profile email'
 })
 

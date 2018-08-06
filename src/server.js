@@ -45,7 +45,7 @@ app.post('/send-sms', (req, res) => {
 app.use((req, res, next) => {
   // require every request to have an authorization header
   if (!req.headers.authorization) {
-    return next(res.redirect('https://radiant-hollows-28084.herokuapp.com/login'))
+    return next(new Error('Authorization header is required'))
   }
   let parts = req.headers.authorization.trim().split(' ')
   let accessToken = parts.pop()
