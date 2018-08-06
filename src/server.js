@@ -45,7 +45,7 @@ app.post('/send-sms', (req, res) => {
 app.use((req, res, next) => {
   // require every request to have an authorization header
   if (!req.headers.authorization) {
-    return next(new Error('Authorization header is required'))
+    return next(res.redirect('https://radiant-hollows-28084.herokuapp.com/login'))
   }
   let parts = req.headers.authorization.trim().split(' ')
   let accessToken = parts.pop()
@@ -59,6 +59,7 @@ app.use((req, res, next) => {
     })
     .catch(next) // jwt did not verify!
 })
+
 if (process.env.DATABASE_URL) {
   database = new Sequelize(process.env.DATABASE_URL)
 } else {
@@ -127,6 +128,6 @@ database
   .sync({ force: true })
   .then(() => {
     app.listen(PORT, () => {
-      console.log('listening to port localhost:8081')
+      console.log('listening to port localhost:' + PORT)
     })
   })
