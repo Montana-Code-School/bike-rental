@@ -105,7 +105,6 @@ export default {
       loading: false,
       shares: [],
       selected: null,
-      zipCode: '',
       previewURL: null,
       options: [
         {value: 'Cruiser', text: 'Cruiser'},
@@ -121,23 +120,6 @@ export default {
       model: {}
     }
   },
-  validations: {
-    zipCode: {
-      required,
-      maxLength: maxLength(5),
-      withParams: [
-        59801,
-        59802,
-        59803,
-        59804,
-        59806,
-        59807,
-        59808,
-        59812
-      ],
-      error: 'This zip code is not in range'
-    }
-  },
   async created () {
     this.refreshShares()
   },
@@ -146,6 +128,9 @@ export default {
       this.loading = true
       this.shares = await api.getShares()
       this.loading = false
+      this.dateOne = ''
+      this.dateTwo = ''
+      this.previewURL = ''
     },
     async populateShareToEdit (share) {
       this.model = Object.assign({}, share)
