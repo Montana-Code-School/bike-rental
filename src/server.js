@@ -138,10 +138,9 @@ let shareResource = epilogue.resource({
     attributes: [ 'bikeType' ]
   }
 })
-
 // Resets the database and launches the express app on :8081
 database
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     app.listen(PORT, () => {
       console.log('listening to port localhost:' + PORT)

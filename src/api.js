@@ -2,8 +2,12 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://radiant-hollows-28084.herokuapp.com/',
-  json: true
+  baseURL: 'http://localhost:8081',
+  json: true,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
 })
 
 export default {
