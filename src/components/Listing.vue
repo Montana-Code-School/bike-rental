@@ -77,7 +77,7 @@
        <h5>Type of bike:</h5> {{ this.filtered.bikeType }}<br/>
        <h5>Description:</h5> {{this.filtered.longDescription}}<br/>
        <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
-       <h5>Confirmed Dates:</h5> {{this.filtered.dateOne}}
+       <h5>Confirmed Dates:</h5> {{frontEndDateFormat(this.filtered.dateOne)}} to {{frontEndDateFormat(this.filtered.dateTwo)}}
      </div>
      <b-btn
         class="mt-3"
@@ -180,6 +180,15 @@ export default {
     },
     modalOutput (share) {
       this.filtered = share
+    },
+    frontEndDateFormat (date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear()
+       if (month.length < 2) month = '0' + month
+       if (day.length < 2) day = '0' + day
+       return [month, day, year].join('-')
     }
   }
 }
