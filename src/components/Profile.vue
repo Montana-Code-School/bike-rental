@@ -12,42 +12,41 @@
               height="100"/>
               <br/>
               <br/>
-              Bike Type: {{share.bikeType}}
+              {{share.bikeType}}
           </p>
           <p>
-            {{share.longDescription}}<br/><br/>
-            Cost: ${{share.costToRent}}
-            Rental dates: {{share.dateOne}} - {{share.dateTwo}}
+            {{share.longDescription}}
+            <br/>
+            <br/>
+            Paid: ${{share.costToRent}}
+            <br/>
+            <br/>
+            Rental dates:
           </p>
         </div>
       </b-card>
     </b-card-group>
   </template>
 
-  <script>
-  import api from '@/api'
-  export default {
-    data () {
-      return {
-        shares: [],
-        model: {}
-      }
-    },
-    async created () {
-      this.getSharesByRented()
-    },
-    methods: {
-      async getSharesByRented () {
-        console.log('front end')
-        this.shares = await api.getSharesByRented()
-        console.log(this.shares)
-      },
-      formatDatesForDb (date) {
-        return new Date(date).toISOString()
-      }
+<script>
+import api from '@/api'
+export default {
+  data () {
+    return {
+      shares: [],
+      model: {}
+    }
+  },
+  async created () {
+    this.getSharesByRented()
+  },
+  methods: {
+    async getSharesByRented () {
+      this.shares = await api.getSharesByRented()
     }
   }
-  </script>
+}
+</script>
 
-  <style lang="css">
-  </style>
+<style lang="css">
+</style>

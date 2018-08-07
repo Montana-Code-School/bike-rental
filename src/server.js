@@ -141,7 +141,6 @@ let shareResource = epilogue.resource({
 
 // Resets the database and launches the express app on :8081
 database
-  .sync({ force: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log('listening to port localhost:' + PORT)
