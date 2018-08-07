@@ -1,7 +1,7 @@
-  <template lang="html">
-    <b-card-group deck class="mb-3">
-      <b-card
-        v-for="share in shares"
+<template lang="html">
+  <b-card-group deck class="mb-3">
+  <b-card
+    v-for="share in shares"
         :key="share.id"
         :title="share.shortDescription"
       >
@@ -22,37 +22,36 @@
         </div>
       </b-card>
     </b-card-group>
-  </template>
+</template>
 
-  <script>
-  import api from '@/api'
-  export default {
-    data () {
-      return {
-        shares: [],
-        model: {}
-      }
-    },
-    async created () {
-      this.getSharesByRented()
-    },
-    methods: {
-      async getSharesByRented () {
-        console.log('front end')
-        this.shares = await api.getSharesByRented()
-      },
-      frontEndDateFormat (date) {
-        var d = new Date(date),
-           month = '' + (d.getMonth() + 1),
-           day = '' + d.getDate(),
-           year = d.getFullYear()
-         if (month.length < 2) month = '0' + month
-         if (day.length < 2) day = '0' + day;
-         return [month, day, year].join('-')
-      }
-
+<script>
+import api from '@/api'
+export default {
+  data () {
+    return {
+      shares: [],
+      model: {}
     }
+  },
+  async created () {
+    this.getSharesByRented()
+  },
+  methods: {
+    async getSharesByRented () {
+      this.shares = await api.getSharesByRented()
+    },
+    frontEndDateFormat (date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear()
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+      return [month, day, year].join('-')
+    }
+
   }
+}
 </script>
 
 <style lang="css">

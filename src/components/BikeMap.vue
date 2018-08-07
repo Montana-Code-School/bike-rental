@@ -34,14 +34,12 @@ export default {
       center: { lat: 46.8656618, lng: -113.97768149999999 },
       markers: [],
       places: [],
-      currentPlace: null,
-      title: null
+      currentPlace: null
     }
   },
 
   mounted () {
     this.geolocate()
-    console.log("mounted", this.title)
     this.addMarker()
   },
 
