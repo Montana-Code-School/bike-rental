@@ -1,10 +1,27 @@
   <template lang="html">
-    
-    <b-btn
-      type="submit"
-      @click="getSharesByRented"
-      variant="success">Find Your Bike
-    </b-btn>
+    <b-card-group deck class="mb-3">
+      <b-card
+        v-for="share in shares"
+        :key="share.id"
+        :title="share.shortDescription"
+      >
+        <div>
+          <p class="card-display">
+            <img
+              :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')"
+              height="100"/>
+              <br/>
+              <br/>
+              Bike Type: {{share.bikeType}}
+          </p>
+          <p>
+            {{share.longDescription}}<br/><br/>
+            Cost: ${{share.costToRent}}
+            Rental dates: {{share.dateOne}} - {{share.dateTwo}}
+          </p>
+        </div>
+      </b-card>
+    </b-card-group>
   </template>
 
   <script>
@@ -16,11 +33,17 @@
         model: {}
       }
     },
+    async created () {
+      this.getSharesByRented()
+    },
     methods: {
       async getSharesByRented () {
         console.log('front end')
-        console.log(this.model)
-        this.shares = await api.getSharesByRented(this.shares)
+        this.shares = await api.getSharesByRented()
+        console.log(this.shares)
+      },
+      formatDatesForDb (date) {
+        return new Date(date).toISOString()
       }
     }
   }
