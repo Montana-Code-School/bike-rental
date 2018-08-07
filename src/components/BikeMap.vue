@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <gmap-map
@@ -18,30 +17,21 @@
 </template>
 
 <script>
-
 export default {
   name: 'google-map',
   props: ['title'],
-  watch: {
-    title: () => {
-      this.title = title
-    }
-  },
   data () {
     return {
       // default to Missoula
-      // change this to whatever makes sense
       center: { lat: 46.8656618, lng: -113.97768149999999 },
       markers: [],
       places: [],
-      currentPlace: null,
-      title: null
+      currentPlace: null
     }
   },
 
   mounted () {
     this.geolocate()
-    console.log("mounted", this.title)
     this.addMarker()
   },
 
