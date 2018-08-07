@@ -26,7 +26,6 @@
 
   <script>
   import api from '@/api'
-  import Moment from 'moment'
   export default {
     data () {
       return {
