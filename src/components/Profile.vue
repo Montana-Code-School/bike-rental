@@ -12,7 +12,7 @@
               height="100"/>
               <br/>
               <br/>
-              Bike Type: {{share.bikeType}}
+              {{share.bikeType}}
           </p>
           <p>
             {{share.longDescription}}<br/><br/>
@@ -26,7 +26,6 @@
 
   <script>
   import api from '@/api'
-  import Moment from 'moment'
   export default {
     data () {
       return {
@@ -55,7 +54,8 @@
       }
     }
   }
-  </script>
+}
+</script>
 
-  <style lang="css">
-  </style>
+<style lang="css">
+</style>
