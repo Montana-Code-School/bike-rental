@@ -23,6 +23,7 @@ const User = {
 
 let router = new Router({
   mode: 'history',
+  base: __dirname,
   routes: [
     {
       path: '/',
@@ -75,6 +76,12 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    { path: '/logout',
+      beforeEnter (to, from, next) {
+        Auth.logout()
+        next('/')
+      }
     }
   ]
 })
@@ -89,6 +96,6 @@ function requireAuth (to, from, next) {
   }
 }
 
-router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
+// router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 
 export default router
