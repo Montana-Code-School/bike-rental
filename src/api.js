@@ -34,6 +34,12 @@ export default {
     } return this.execute('get', url)
     // http://localhost:8081/shares?sort=-bikeType
   },
+  getSharesByRented () {
+    let url = ''
+    url = `/shares?isPaid=true&isRented=true`
+    console.log('backend', url)
+    return this.execute('get', url)
+  },
   getShares () {
     return this.execute('get', '/shares')
   },

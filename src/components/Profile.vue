@@ -1,9 +1,28 @@
   <template lang="html">
-    <h3>Profile</h3>
+    
+    <b-btn
+      type="submit"
+      @click="getSharesByRented"
+      variant="success">Find Your Bike
+    </b-btn>
   </template>
 
   <script>
+  import api from '@/api'
   export default {
+    data () {
+      return {
+        shares: [],
+        model: {}
+      }
+    },
+    methods: {
+      async getSharesByRented () {
+        console.log('front end')
+        console.log(this.model)
+        this.shares = await api.getSharesByRented(this.shares)
+      }
+    }
   }
   </script>
 
