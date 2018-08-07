@@ -15,34 +15,43 @@
               {{share.bikeType}}
           </p>
           <p>
-            {{share.longDescription}}
-            <br/>
-            <br/>
-            Paid: ${{share.costToRent}}
-            <br/>
-            <br/>
-            Rental dates:
+            {{share.longDescription}}<br/><br/>
+            Cost: ${{share.costToRent}}<br/>
+            Rental dates: {{frontEndDateFormat(share.dateOne)}} to {{frontEndDateFormat(share.dateTwo)}}
           </p>
         </div>
       </b-card>
     </b-card-group>
   </template>
 
-<script>
-import api from '@/api'
-export default {
-  data () {
-    return {
-      shares: [],
-      model: {}
-    }
-  },
-  async created () {
-    this.getSharesByRented()
-  },
-  methods: {
-    async getSharesByRented () {
-      this.shares = await api.getSharesByRented()
+  <script>
+  import api from '@/api'
+  export default {
+    data () {
+      return {
+        shares: [],
+        model: {}
+      }
+    },
+    async created () {
+      this.getSharesByRented()
+    },
+    methods: {
+      async getSharesByRented () {
+        console.log('front end')
+        this.shares = await api.getSharesByRented()
+      },
+      frontEndDateFormat (date) {
+        var d = new Date(date),
+             month = '' + (d.getMonth() + 1),
+             day = '' + d.getDate(),
+             year = d.getFullYear();
+
+         if (month.length < 2) month = '0' + month;
+         if (day.length < 2) day = '0' + day;
+
+         return [month, day, year].join('-');
+      }
     }
   }
 }
