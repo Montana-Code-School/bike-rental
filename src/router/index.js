@@ -27,7 +27,8 @@ let router = new Router({
     {
       path: '/',
       name: 'Hello',
-      component: Hello
+      component: Hello,
+      beforeEnter: requireAuth
     },
     {
       path: '/nexmo',
@@ -41,7 +42,10 @@ let router = new Router({
     {
       path: '/shares',
       name: 'BikeShareManager',
-      component: BikeShareManager
+      component: BikeShareManager,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/listings',
@@ -74,6 +78,16 @@ let router = new Router({
     }
   ]
 })
+function requireAuth (to, from, next) {
+  if (!Auth.loggedIn()) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
+}
 
 router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 
