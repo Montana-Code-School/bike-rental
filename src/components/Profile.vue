@@ -16,8 +16,8 @@
           </p>
           <p>
             {{share.longDescription}}<br/><br/>
-            Cost: ${{share.costToRent}}
-            Rental dates: {{share.dateOne}} - {{share.dateTwo}}
+            Cost: ${{share.costToRent}}<br/>
+            Rental dates: {{frontEndDateFormat(share.dateOne)}} to {{frontEndDateFormat(share.dateTwo)}}
           </p>
         </div>
       </b-card>
@@ -26,6 +26,7 @@
 
   <script>
   import api from '@/api'
+  import Moment from 'moment'
   export default {
     data () {
       return {
@@ -40,10 +41,17 @@
       async getSharesByRented () {
         console.log('front end')
         this.shares = await api.getSharesByRented()
-        console.log(this.shares)
       },
-      formatDatesForDb (date) {
-        return new Date(date).toISOString()
+      frontEndDateFormat (date) {
+        var d = new Date(date),
+             month = '' + (d.getMonth() + 1),
+             day = '' + d.getDate(),
+             year = d.getFullYear();
+
+         if (month.length < 2) month = '0' + month;
+         if (day.length < 2) day = '0' + day;
+
+         return [month, day, year].join('-');
       }
     }
   }
