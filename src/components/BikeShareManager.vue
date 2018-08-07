@@ -17,7 +17,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="share in shares" :key="share.id">
+            <tr
+              v-for="share in shares"
+              :key="share.id"
+            >
               <td>{{ share.shortDescription }}</td>
               <td><img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="20"/></td>
               <td>{{ share.costToRent }}</td>

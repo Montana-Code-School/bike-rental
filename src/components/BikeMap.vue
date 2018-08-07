@@ -1,7 +1,6 @@
 
 <template>
   <div>
-    <!-- <h1>{{title}}</h1> -->
     <gmap-map
       :center="center"
       :zoom="12"
