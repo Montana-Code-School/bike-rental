@@ -1,19 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Auth from '@okta/okta-vue'
+import auth from '@/auth'
 import Hello from '@/components/Hello'
 import BikeShareManager from '@/components/BikeShareManager'
 import BikeListing from '@/components/Listing'
 import NexmoTest from '@/components/NexmoTest'
 import Confirmation from '@/components/Confirmation'
 import Profile from '@/components/Profile'
-
-Vue.use(Auth, {
-  issuer: 'https://dev-595847.oktapreview.com/oauth2/default',
-  client_id: '0oafsc1rp991wJMJ90h7',
-  redirect_uri: window.location.origin + '/implicit/callback',
-  scope: 'openid profile email'
-})
+import Login from '@/components/Login'
+import About from '@/components/About'
+import Dashboard from '@/components/Dashboard'
+import AuthTest from '@/components/AuthTest'
 
 Vue.use(Router)
 
@@ -36,32 +33,22 @@ let router = new Router({
       component: NexmoTest
     },
     {
-      path: '/implicit/callback',
-      component: Auth.handleCallback()
-    },
-    {
       path: '/shares',
       name: 'BikeShareManager',
       component: BikeShareManager,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/listings',
       name: 'BikeListing',
       component: BikeListing,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/confirmation',
       name: 'Confirmation',
       component: Confirmation,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
     {
       path: '/confirmation/:id',
@@ -72,20 +59,38 @@ let router = new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: requireAuth
     },
-    { path: '/logout',
+    {
+      path: '/auth-test',
+      name: 'AuthTest',
+      component: AuthTest
+    },
+    {
+      path: '/about',
+      component: About
+    },
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/logout',
       beforeEnter (to, from, next) {
-        Auth.logout()
+        auth.logout()
         next('/')
       }
     }
   ]
 })
+
 function requireAuth (to, from, next) {
-  if (!Auth.loggedIn()) {
+  if (!auth.loggedIn()) {
     next({
       path: '/login',
       query: { redirect: to.fullPath }
@@ -94,7 +99,4 @@ function requireAuth (to, from, next) {
     next()
   }
 }
-
-// router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
-
 export default router
