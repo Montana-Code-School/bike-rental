@@ -1,3 +1,7 @@
+const OktaAuth = require('@okta/okta-auth-js')
+const authClient = new OktaAuth({url: 'https://dev-563731.oktapreview.com', issuer: 'default'})
+
+// 0oafw2m5winCaBnXv0h7
 
 export default {
   login (email, pass, cb) {
@@ -7,15 +11,19 @@ export default {
       this.onChange(true)
       return
     }
-    pretendRequest(email, pass, (res) => {
-      if (res.authenticated) {
-        localStorage.token = res.token
+    return authClient.signIn({
+      username: email,
+      password: pass
+    }).then(response => {
+      if (response.status === 'SUCCESS') {
+        localStorage.token = response.sessionToken
         if (cb) cb(new Error('false'), true)
-        this.onChange('true')
-      } else {
-        if (cb) cb(new Error('false'))
-        this.onChange(false)
+        this.onChange(true)
       }
+    }).fail(err => {
+      console.error(err.message)
+      if (cb) cb(new Error('false'))
+      this.onChange(false)
     })
   },
 
@@ -34,17 +42,4 @@ export default {
   },
 
   onChange () {}
-}
-
-const pretendRequest = (email, pass, cb) => {
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
-      cb(new Error('false'), {
-        authenticated: true,
-        token: Math.random().toString(36).substring(7)
-      })
-    } else {
-      cb(new Error('false'))
-    }
-  }, 0)
 }

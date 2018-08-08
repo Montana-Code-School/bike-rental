@@ -38,7 +38,6 @@ export default {
   methods: {
     // receives a place object via the autocomplete component
     addMarker () {
-      console.log(this.title)
       if (this.title) {
         const marker = {
           lat: Number(this.title.lat),

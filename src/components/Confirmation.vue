@@ -1,11 +1,12 @@
 <template>
 <div>
+  <br>
+  <h1 class="h1 text-center"><b>Your Bike Is Confirmed</b></h1><hr>
   <b-card-group deck class="mb-3">
   <b-card>
     <div>
       <b-img
         :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')"
-        fluid
         fluid alt="bike image"
       />
     </div>

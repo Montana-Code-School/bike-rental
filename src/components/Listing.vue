@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid mt-4">
-    <h1 class="h1 text-center">Find Your Ride!</h1>
+    <h1 class="h1 text-center"><b>Find Your Ride!</b></h1>
     <hr>
     <b-container>
       <b-row lg="3" class="search-container" align-h="center">
@@ -24,7 +24,7 @@
               @date-two-selected="val => { dateTwo = val, model.dateTwo = this.formatDatesForDb(val) }"
             />
           </div>
-        </b-form-group>
+          </b-form-group>
           <b-form-group label="Bike Type">
             <b-form-select
             v-model="model.bikeType"
@@ -32,23 +32,23 @@
             class="mb-3"
             />
           </b-form-group>
-      <b-btn
-        type="submit"
-        variant="secondary">Find Your Bike
-      </b-btn>
-    </form>
-  </b-row>
-</b-container>
+          <b-btn
+            type="submit"
+            variant="secondary">Find Your Bike
+          </b-btn>
+        </form>
+      </b-row>
+    </b-container>
     <br><br>
     <b-card-group deck class="mb-3">
-    <b-card
-      v-for="share in shares"
-      :key="share.id"
-      bg-variant="info"
-      text-variant="white"
-      :header="share.shortDescription"
-      class="text-center"
-      >
+      <b-card
+        v-for="share in shares"
+        :key="share.id"
+        bg-variant="info"
+        text-variant="white"
+        :header="share.shortDescription"
+        class="text-center"
+        >
         <div>
           <p class="card-display">
             <img
@@ -69,45 +69,46 @@
           @click="modalOutput(share)"
           variant="secondary">
           Reserve this bike
-      </b-btn>
-    </b-card>
-  </b-card-group>
-     <b-modal id="myModal" ref="myModalRef" hide-footer >
-       <div>
-         <h1>{{this.filtered.shortDescription}}</h1><br/>
-       <img
-         :src="(this.filtered.uploadedPicture ? 'data:image/png;base64,' + this.filtered.uploadedPicture : '')"
-         height="100"/><br/><br/>
-       <h5>Type of bike:</h5> {{ this.filtered.bikeType }}<br/>
-       <h5>Description:</h5> {{this.filtered.longDescription}}<br/>
-       <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
-       <h5>Confirmed Dates:</h5> {{frontEndDateFormat(this.filtered.dateOne)}} to {{frontEndDateFormat(this.filtered.dateTwo)}}
-     </div>
-     <b-btn
-        class="mt-3 button"
-        variant="primary"
-        @click="toggleInput">Confirmation
-     </b-btn>
-     <b-btn
-      class="mt-3"
-      variant="outline-danger"
-      @click="hideModal">Cancel
-     </b-btn>
-     <div v-if="showCard">
-       <h5>Please give us your payment details:</h5>
-       <card class='stripe-card'
-         :class='{ complete }'
-         :stripe= 'stripeKey'
-         :options='stripeOptions'
-         @change='complete = $event.complete'
-       />
-       <b-btn
-         class='pay-with-stripe'
-         @click='pay'
-         :disabled='!complete'>Pay with credit card
-      </b-btn>
-     </div>
-     </b-modal>
+        </b-btn>
+      </b-card>
+    </b-card-group>
+      <b-modal id="myModal" ref="myModalRef" hide-footer >
+        <div>
+          <h1>{{this.filtered.shortDescription}}</h1><br/>
+          <img
+           :src="(this.filtered.uploadedPicture ? 'data:image/png;base64,' + this.filtered.uploadedPicture : '')"
+           height="100"/><br/><br
+          />
+          <h5>Type of bike:</h5> {{ this.filtered.bikeType }}<br/>
+          <h5>Description:</h5> {{this.filtered.longDescription}}<br/>
+          <h5>Cost:</h5> ${{ this.filtered.costToRent }}<br/>
+          <h5>Confirmed Dates:</h5> {{frontEndDateFormat(this.filtered.dateOne)}} to {{frontEndDateFormat(this.filtered.dateTwo)}}
+        </div>
+        <b-btn
+          class="mt-3 button"
+          variant="primary"
+          @click="toggleInput">Confirmation
+        </b-btn>
+        <b-btn
+        class="mt-3"
+        variant="outline-danger"
+        @click="hideModal">Cancel
+        </b-btn>
+        <div v-if="showCard">
+          <h5>Please give us your payment details:</h5>
+          <card class='stripe-card'
+            :class='{ complete }'
+            :stripe= 'stripeKey'
+            :options='stripeOptions'
+            @change='complete = $event.complete'
+          />
+          <b-btn
+            class='pay-with-stripe'
+            @click='pay'
+            :disabled='!complete'>Pay with credit card
+          </b-btn>
+        </div>
+      </b-modal>
   </div>
 </template>
 
@@ -196,17 +197,16 @@ export default {
     }
   }
 }
-// change search box to be lined up side by side
 </script>
 
 <style scoped>
   .bikeType {
     width: 100%;
   }
-    .button {
-      border: none;
-      border-radius: 2px;
-    }
+  .button {
+    border: none;
+    border-radius: 2px;
+  }
   .stripe-card {
     width: 300px;
     border: 1px solid grey;
