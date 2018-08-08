@@ -202,6 +202,12 @@ export default {
 }
 </script>
 <style>
+  .container-fluid.mt-4 {
+      background: #EEC584;
+  }
+  .card-body {
+    background: #1B998B;
+  }
   .background {
     background-color: #EEC584;
   }

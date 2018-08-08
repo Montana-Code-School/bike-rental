@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: #EEC584;
   }
   .hero .lead {
     font-weight: 200;
