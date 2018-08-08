@@ -54,7 +54,7 @@
       }
     }
   }
-}
+
 </script>
 
 <style lang="css">
