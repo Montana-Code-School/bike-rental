@@ -214,6 +214,9 @@ export default {
   .listing {
     background-color: #1B998B;
   }
+  .card.listing {
+    background: #EEC584;
+}
   .table {
     background-color: white;
   }

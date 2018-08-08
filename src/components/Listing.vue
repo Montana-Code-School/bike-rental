@@ -200,6 +200,9 @@ export default {
 </script>
 
 <style scoped>
+  html, body {
+    background: #EEC584;
+  }
   .bikeType {
     width: 100%;
   }
