@@ -7,7 +7,7 @@
       <b-col class="b-col background">
         <table class="table table-striped">
           <thead>
-            <tr>
+            <tr class="listing">
               <th>Short Description</th>
               <th>Uploaded Picture</th>
               <th>Cost to Rent</th>
@@ -17,7 +17,7 @@
               <th>&nbsp;</th>
             </tr>
           </thead>
-          <tbody >
+          <tbody class="table">
             <tr
               v-for="share in shares"
               :key="share.id"
@@ -37,8 +37,8 @@
           </tbody>
         </table>
       </b-col>
-      <b-col lg="3">
-        <b-card :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
+      <b-col lg="3" >
+        <b-card class="listing" :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
         <b-form-group>
           <div class="datepicker-trigger">Available Dates
             <input
@@ -87,7 +87,7 @@
               </gmap-autocomplete>
             </b-form-group>
             <div>
-              <b-btn type="submit" variant="success">Save Bike Data</b-btn>
+              <b-btn type="submit" variant="secondary">Save Bike Data</b-btn>
             </div>
           </form>
         </b-card>
@@ -202,6 +202,12 @@ export default {
 </script>
 <style>
   .background {
+    background-color: #EEC584;
+  }
+  .listing {
+    background-color: #1B998B;
+  }
+  .table {
     background-color: white;
   }
   b-col{

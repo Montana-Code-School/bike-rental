@@ -2,10 +2,8 @@
   <div class="container-fluid mt-4">
     <h1 class="h1 text-center">Find Your Ride!</h1>
     <hr>
-    <b-jumbotron
-    class="search-container"
-    >
-      <b-col lg="3">
+    <b-container>
+      <b-row lg="3" class="search-container" align-h="center">
         <form @submit.prevent="getSharesByBikeType">
           <b-form-group>
           <div class="datepicker-trigger">Pick your dates
@@ -39,9 +37,9 @@
         variant="secondary">Find Your Bike
       </b-btn>
     </form>
-  </b-col>
-</b-jumbotron>
-
+  </b-row>
+</b-container>
+    <br><br>
     <b-card-group deck class="mb-3">
     <b-card
       v-for="share in shares"
@@ -217,11 +215,8 @@ export default {
     border-color: green;
   }
   .search-container {
-    /* background-color: #EEC584; */
-    width: 55%;
     display: flex;
     text-align: center;
-    justify-content: center;
     flex-wrap: wrap;
   }
   .search-item {
