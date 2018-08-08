@@ -99,7 +99,6 @@
 <script>
 import format from 'date-fns/format'
 import api from '@/api'
-import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
   data () {
     return {

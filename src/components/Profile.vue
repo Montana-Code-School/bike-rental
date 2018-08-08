@@ -1,7 +1,7 @@
-  <template lang="html">
-    <b-card-group deck class="mb-3">
-      <b-card
-        v-for="share in shares"
+<template lang="html">
+  <b-card-group deck class="mb-3">
+  <b-card
+    v-for="share in shares"
         :key="share.id"
         :title="share.shortDescription"
       >
@@ -12,7 +12,7 @@
               height="100"/>
               <br/>
               <br/>
-              Bike Type: {{share.bikeType}}
+              {{share.bikeType}}
           </p>
           <p>
             {{share.longDescription}}<br/><br/>
@@ -22,39 +22,37 @@
         </div>
       </b-card>
     </b-card-group>
-  </template>
+</template>
 
-  <script>
-  import api from '@/api'
-  export default {
-    data () {
-      return {
-        shares: [],
-        model: {}
-      }
-    },
-    async created () {
-      this.getSharesByRented()
-    },
-    methods: {
-      async getSharesByRented () {
-        console.log('front end')
-        this.shares = await api.getSharesByRented()
-      },
-      frontEndDateFormat (date) {
-        var d = new Date(date),
-             month = '' + (d.getMonth() + 1),
-             day = '' + d.getDate(),
-             year = d.getFullYear();
-
-         if (month.length < 2) month = '0' + month;
-         if (day.length < 2) day = '0' + day;
-
-         return [month, day, year].join('-');
-      }
+<script>
+import api from '@/api'
+export default {
+  data () {
+    return {
+      shares: [],
+      model: {}
     }
-  }
-  </script>
+  },
+  async created () {
+    this.getSharesByRented()
+  },
+  methods: {
+    async getSharesByRented () {
+      this.shares = await api.getSharesByRented()
+    },
+    frontEndDateFormat (date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear()
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+      return [month, day, year].join('-')
+    }
 
-  <style lang="css">
-  </style>
+  }
+
+</script>
+
+<style lang="css">
+</style>
