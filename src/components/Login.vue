@@ -48,6 +48,9 @@ export default {
 </script>
 
 <style>
+  html, body {
+    background: #EEC584;
+  }
   .card {
     align-items: center;
     background-color: #1B998B;
