@@ -28,8 +28,7 @@ let router = new Router({
     {
       path: '/',
       name: 'Hello',
-      component: Hello,
-      beforeEnter: requireAuth
+      component: Hello
     },
     {
       path: '/nexmo',
