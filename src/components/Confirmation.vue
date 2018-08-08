@@ -27,6 +27,7 @@
     class="text-center"
   >
   <h1>your adventure awaits</h1>
+  <img src="../assets/adventure.jpg" alt="Zootown Bike Share" height="400" width="500">
   </b-card>
   </b-card-group>
 </div>
