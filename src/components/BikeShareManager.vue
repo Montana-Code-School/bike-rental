@@ -1,12 +1,13 @@
 <template>
   <div class="container-fluid mt-4">
-    <h1 class="h1">Bike Share Manager</h1>
+    <h1 class="h1 text-center"><b>Bike Share Manager</b></h1>
+    <hr>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
     <b-row>
-      <b-col>
+      <b-col class="b-col background">
         <table class="table table-striped">
           <thead>
-            <tr>
+            <tr class="listing">
               <th>Short Description</th>
               <th>Uploaded Picture</th>
               <th>Cost to Rent</th>
@@ -16,10 +17,11 @@
               <th>&nbsp;</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table">
             <tr
               v-for="share in shares"
               :key="share.id"
+
             >
               <td>{{ share.shortDescription }}</td>
               <td><img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="20"/></td>
@@ -35,8 +37,8 @@
           </tbody>
         </table>
       </b-col>
-      <b-col lg="3">
-        <b-card :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
+      <b-col lg="3" >
+        <b-card class="listing" :title="(model.id ? 'Edit Share ID#' + model.id : 'New Share')">
         <b-form-group>
           <div class="datepicker-trigger">Available Dates
             <input
@@ -58,7 +60,6 @@
           </div>
         </b-form-group>
           <form @submit.prevent="saveShare">
-            <img id="img" :src="previewURL" alt="bike picture">
             <b-form-group label="Bike Picture">
             <div>
               <input type="file" @change = "readFile1"
@@ -86,7 +87,7 @@
               </gmap-autocomplete>
             </b-form-group>
             <div>
-              <b-btn type="submit" variant="success">Save Bike Data</b-btn>
+              <b-btn type="submit" variant="secondary">Save Bike Data</b-btn>
             </div>
           </form>
         </b-card>
@@ -120,7 +121,19 @@ export default {
         {value: 'Unicycle', text: 'Unicycle'},
         {value: 'Other', text: 'Other'}
       ],
-      model: {}
+      model: {},
+      colors: [
+        {
+          id: 'ssmf',
+          hex: ['#297afb','#2898fb','#01d8fd'],
+          title: 'Sleek, Sophisticated, Mature & Formal'
+        },
+        {
+          id: 'hlfss',
+          hex: ['#297afb','#2898fb','#01d8fd'],
+          title: 'Honest, Loyal, Friendly, Stable, & Strong'
+        }
+        ]
     }
   },
   async created () {
@@ -173,10 +186,10 @@ export default {
     formatDates (dateOne, dateTwo) {
       let formattedDates = ''
       if (dateOne) {
-        formattedDates = format(dateOne, this.dateFormat).toISOString(dateOne)
+        formattedDates = format(dateOne, this.dateFormat)
       }
       if (dateTwo) {
-        formattedDates += ' - ' + format(dateTwo, this.dateFormat).toISOString(dateTwo)
+        formattedDates += ' - ' + format(dateTwo, this.dateFormat)
       }
       return formattedDates
     },
@@ -188,3 +201,21 @@ export default {
   }
 }
 </script>
+<style>
+  .background {
+    background-color: #EEC584;
+  }
+  .listing {
+    background-color: #1B998B;
+  }
+  .table {
+    background-color: white;
+  }
+  b-col{
+      display:block;
+      border: 2px solid blue;
+      border-collapse: separate;
+      border-spacing: 4px;
+      margin-bottom:10px;
+}
+</style>
