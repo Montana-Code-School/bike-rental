@@ -172,10 +172,10 @@ export default {
     formatDates (dateOne, dateTwo) {
       let formattedDates = ''
       if (dateOne) {
-        formattedDates = format(dateOne, this.dateFormat).toISOString(dateOne)
+        formattedDates = format(dateOne, this.dateFormat)
       }
       if (dateTwo) {
-        formattedDates += ' - ' + format(dateTwo, this.dateFormat).toISOString(dateTwo)
+        formattedDates += ' - ' + format(dateTwo, this.dateFormat)
       }
       return formattedDates
     },
