@@ -15,8 +15,8 @@ const nexmo = new Nexmo({
 }, {debug: true})
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  clientId: '0oafsc1rp991wJMJ90h7',
-  issuer: 'https://dev-595847.oktapreview.com/oauth2/default'
+  clientId: '0oafw2m5winCaBnXv0h7',
+  issuer: 'https://dev-563731.oktapreview.com/oauth2/default'
 })
 
 let app = express()

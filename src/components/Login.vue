@@ -1,15 +1,18 @@
 <template>
   <div>
-    <h2>Login</h2>
+    <br>
+    <h1 class="h1 text-center"><b>Login</b></h1><hr>
     <p v-if="$route.query.redirect">
       You need to login first.
     </p>
-    <form @submit.prevent="login">
-      <label><input v-model="email" placeholder="email"></label>
-      <label><input v-model="pass" placeholder="password" type="password"></label> (hint: password1)<br>
-      <button type="submit">login</button>
+    <b-card class="card">
+    <form @submit.prevent="login" autocomplete="off" style="text-align:center">
+      <label><input v-model="email" placeholder="email" v-focus></label>
+      <label><input v-model="pass" placeholder="password" type="password"></label><br>
+      <b-btn type="submit" variant="secondary">Login</b-btn>
       <p v-if="error" class="error">Bad login information</p>
     </form>
+  </b-card>
   </div>
 </template>
 
@@ -18,9 +21,16 @@ import auth from '../auth'
 export default {
   data () {
     return {
-      email: 'joe@example.com',
-      pass: '',
+      email: 'ed42311@gmail.com',
+      pass: '1@B%hn&N4agDbm91',
       error: false
+    }
+  },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
     }
   },
   methods: {
@@ -38,6 +48,12 @@ export default {
 </script>
 
 <style>
+  .card {
+    align-items: center;
+    background-color: #1B998B;
+    margin-left: 200px;
+    margin-right: 200px;
+  }
   .error {
     color: red;
   }

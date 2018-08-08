@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import axios from 'axios'
+import auth from './auth'
 
 const client = axios.create({
   baseURL: 'http://localhost:8081',
@@ -9,7 +9,7 @@ const client = axios.create({
 export default {
   async execute (method, resource, data) {
     // inject the accessToken for each request
-    let accessToken = await Vue.prototype.$auth.getAccessToken()
+    let accessToken = auth.getToken()
     return client({
       method,
       url: resource,
@@ -37,7 +37,6 @@ export default {
   getSharesByRented () {
     let url = ''
     url = `/shares?isPaid=true&isRented=true`
-    console.log('backend', url)
     return this.execute('get', url)
   },
   getShares () {

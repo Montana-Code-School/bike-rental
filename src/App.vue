@@ -9,8 +9,8 @@
           <b-nav-item to="/shares">Bike Share Manager</b-nav-item>
           <b-nav-item to="/listings">Bike Listings</b-nav-item>
           <b-nav-item to="/profile">Profile</b-nav-item>
-          <b-nav-item href="#" @click.prevent="login" v-if="!activeUser">Login</b-nav-item>
-          <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>
+          <b-nav-item to="/login">Login</b-nav-item>
+          <b-nav-item to="/logout">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -20,12 +20,17 @@
 </template>
 
 <script>
-
+import auth from './auth'
 export default {
   name: 'app',
   data () {
     return {
-      activeUser: null
+      activeUser: !!localStorage.token
+    }
+  },
+  methods: {
+    switchActiveUser () {
+      this.activeUser = auth.loggedIn()
     }
   }
 }

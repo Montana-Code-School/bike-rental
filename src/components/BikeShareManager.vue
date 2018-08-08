@@ -125,15 +125,15 @@ export default {
       colors: [
         {
           id: 'ssmf',
-          hex: ['#297afb','#2898fb','#01d8fd'],
+          hex: ['#297afb', '#2898fb', '#01d8fd'],
           title: 'Sleek, Sophisticated, Mature & Formal'
         },
         {
           id: 'hlfss',
-          hex: ['#297afb','#2898fb','#01d8fd'],
+          hex: ['#297afb', '#2898fb', '#01d8fd'],
           title: 'Honest, Loyal, Friendly, Stable, & Strong'
         }
-        ]
+      ]
     }
   },
   async created () {

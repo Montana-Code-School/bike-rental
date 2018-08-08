@@ -1,4 +1,7 @@
 <template lang="html">
+  <div>
+    <br>
+    <h1 class="h1 text-center"><b>Rented Bikes</b></h1><hr>
   <b-card-group deck class="mb-3">
     <b-card
       v-for="share in shares"
@@ -17,12 +20,13 @@
         <br/>
         <p>
           More about your Zootown bike: {{share.longDescription}}<br/><br/>
-          ${{share.costToRent}}<br/><br/>
+          Cost: ${{share.costToRent}}<br/><br/>
           Call this Zootown bike your very own from {{frontEndDateFormat(share.dateOne)}} to {{frontEndDateFormat(share.dateTwo)}}
         </p>
       </div>
     </b-card>
   </b-card-group>
+  </div>
 </template>
 
 <script>
@@ -38,7 +42,7 @@ export default {
     this.getSharesByRented()
   },
   methods: {
-    async getSharesByRented () 
+    async getSharesByRented () {
       this.shares = await api.getSharesByRented()
     },
     frontEndDateFormat (date) {
@@ -54,5 +58,12 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
+  .card-deck {
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px
+  }
 </style>
