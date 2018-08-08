@@ -1,10 +1,11 @@
 <template>
 <div>
   <b-card-group deck class="mb-3">
-  <b-card title="now you're ready to roll">
+  <b-card>
     <div>
       <b-img
         :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')"
+        fluid
         fluid alt="bike image"
       />
     </div>
@@ -22,11 +23,17 @@
     </p>
   </b-card>
   <b-card
-    bg-variant="success"
+    bg-variant="info"
     text-variant="white"
     class="text-center"
   >
-  <h1>your adventure awaits</h1>
+  <div>
+    <h1>
+      your adventure awaits
+    </h1>
+    <br>
+    <img src="../assets/adventure.jpg" alt="Zootown Bike Share" height="500" width="700">
+  </div>
   </b-card>
   </b-card-group>
 </div>
@@ -61,7 +68,11 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  img.card-img-top {
-    height: 150;
+  .card-deck {
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px
   }
 </style>
