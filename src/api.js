@@ -2,7 +2,7 @@ import axios from 'axios'
 import auth from './auth'
 
 const client = axios.create({
-  baseURL: 'http://localhost:8081',
+  baseURL: 'https://radiant-hollows-28084.herokuapp.com/',
   json: true
 })
 
