@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid mt-4">
-    <h1 class="h1 text-center">Bike Share Manager</h1>
+    <h1 class="h1 text-center"><b>Bike Share Manager</b></h1>
     <hr>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
     <b-row>

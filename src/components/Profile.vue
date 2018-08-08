@@ -12,12 +12,13 @@
               height="100"/>
               <br/>
               <br/>
-              {{share.bikeType}}
+              Your Zootown bike is a {{share.bikeType}}.
           </p>
+          <br/>
           <p>
-            {{share.longDescription}}<br/><br/>
-            Cost: ${{share.costToRent}}<br/>
-            Rental dates: {{frontEndDateFormat(share.dateOne)}} to {{frontEndDateFormat(share.dateTwo)}}
+            More about your Zootown bike: {{share.longDescription}}<br/><br/>
+            ${{share.costToRent}}<br/><br/>
+            Call this Zootown bike your very own from {{frontEndDateFormat(share.dateOne)}} to {{frontEndDateFormat(share.dateTwo)}}
           </p>
         </div>
       </b-card>

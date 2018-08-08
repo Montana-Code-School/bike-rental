@@ -11,9 +11,9 @@
     </div>
     <p class="card-text">
       <b-list-group flush>
-      <b-list-group-item>Short{{this.share.shortDescription}}</b-list-group-item>
-      <b-list-group-item>Long{{this.share.longDescription}}</b-list-group-item>
-      <b-list-group-item>${{this.share.costToRent}}</b-list-group-item>
+      <b-list-group-item>A little deets about this Zootown bicycle: {{this.share.shortDescription}}</b-list-group-item>
+      <b-list-group-item>A lotta deets about this Zootown bicycle: {{this.share.longDescription}}</b-list-group-item>
+      <b-list-group-item>Price: ${{this.share.costToRent}}</b-list-group-item>
       <b-list-group-item>Pick up location: {{this.share.address}} {{this.share.city}}, MT
         <div id="google-map">
           <bike-map :title="this.share"/>

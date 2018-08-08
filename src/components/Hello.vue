@@ -2,7 +2,7 @@
   <div class="hero">
     <div>
     </br></br></br>
-      <h1 class="display-3">Hello Zootown Bike Share World</h1>
+      <h1 class="display-3">Hello <b><strong>Zootown Bike Share</strong></b> World</h1>
       <p class="lead">Making Bikes Feel Loved, Needed and Wanted....Everyday!</p>
       <hr>
       <br>
