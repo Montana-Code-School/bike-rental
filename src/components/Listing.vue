@@ -1,7 +1,10 @@
 <template>
   <div class="container-fluid mt-4">
     <h1 class="h1 text-center">Find Your Ride!</h1>
-    <b-jumbotron class="center-block" >
+    <hr>
+    <b-jumbotron
+    class="search-container"
+    >
       <b-col lg="3">
         <form @submit.prevent="getSharesByBikeType">
           <b-form-group>
@@ -33,7 +36,7 @@
           </b-form-group>
       <b-btn
         type="submit"
-        variant="success">Find Your Bike
+        variant="secondary">Find Your Bike
       </b-btn>
     </form>
   </b-col>
@@ -43,8 +46,11 @@
     <b-card
       v-for="share in shares"
       :key="share.id"
-      :title="share.shortDescription"
-      class="search-item">
+      bg-variant="info"
+      text-variant="white"
+      :header="share.shortDescription"
+      class="text-center"
+      >
         <div>
           <p class="card-display">
             <img
@@ -63,7 +69,7 @@
           v-b-modal.myModal
           type="button"
           @click="modalOutput(share)"
-          variant="primary">
+          variant="secondary">
           Reserve this bike
       </b-btn>
     </b-card>
@@ -80,7 +86,7 @@
        <h5>Confirmed Dates:</h5> {{frontEndDateFormat(this.filtered.dateOne)}} to {{frontEndDateFormat(this.filtered.dateTwo)}}
      </div>
      <b-btn
-        class="mt-3"
+        class="mt-3 button"
         variant="primary"
         @click="toggleInput">Confirmation
      </b-btn>
@@ -195,7 +201,14 @@ export default {
 // change search box to be lined up side by side
 </script>
 
-<style>
+<style scoped>
+  .bikeType {
+    width: 100%;
+  }
+    .button {
+      border: none;
+      border-radius: 2px;
+    }
   .stripe-card {
     width: 300px;
     border: 1px solid grey;
@@ -204,10 +217,11 @@ export default {
     border-color: green;
   }
   .search-container {
+    /* background-color: #EEC584; */
+    width: 55%;
     display: flex;
-    /* align-items: center; */
+    text-align: center;
     justify-content: center;
-    margin: 0 0.5rem;
     flex-wrap: wrap;
   }
   .search-item {

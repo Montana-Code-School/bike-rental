@@ -1,9 +1,10 @@
 <template>
   <div class="container-fluid mt-4">
-    <h1 class="h1">Bike Share Manager</h1>
+    <h1 class="h1 text-center">Bike Share Manager</h1>
+    <hr>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
     <b-row>
-      <b-col>
+      <b-col class="b-col background">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -16,10 +17,11 @@
               <th>&nbsp;</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             <tr
               v-for="share in shares"
               :key="share.id"
+
             >
               <td>{{ share.shortDescription }}</td>
               <td><img :src="(share.uploadedPicture ? 'data:image/png;base64,' + share.uploadedPicture : '')" height="20"/></td>
@@ -58,7 +60,6 @@
           </div>
         </b-form-group>
           <form @submit.prevent="saveShare">
-            <img id="img" :src="previewURL" alt="bike picture">
             <b-form-group label="Bike Picture">
             <div>
               <input type="file" @change = "readFile1"
@@ -120,7 +121,19 @@ export default {
         {value: 'Unicycle', text: 'Unicycle'},
         {value: 'Other', text: 'Other'}
       ],
-      model: {}
+      model: {},
+      colors: [
+        {
+          id: 'ssmf',
+          hex: ['#297afb','#2898fb','#01d8fd'],
+          title: 'Sleek, Sophisticated, Mature & Formal'
+        },
+        {
+          id: 'hlfss',
+          hex: ['#297afb','#2898fb','#01d8fd'],
+          title: 'Honest, Loyal, Friendly, Stable, & Strong'
+        }
+        ]
     }
   },
   async created () {
@@ -188,3 +201,15 @@ export default {
   }
 }
 </script>
+<style>
+  .background {
+    background-color: white;
+  }
+  b-col{
+      display:block;
+      border: 2px solid blue;
+      border-collapse: separate;
+      border-spacing: 4px;
+      margin-bottom:10px;
+}
+</style>

@@ -54,6 +54,7 @@ export default {
 <style>
 body {
   margin: 0;
+  background: #EEC584;
 }
 
 #app {

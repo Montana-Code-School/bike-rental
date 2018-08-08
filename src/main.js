@@ -9,6 +9,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
 import 'vue-airbnb-style-datepicker/dist/styles.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueParticles from 'vue-particles'
+
+Vue.use(VueParticles)
 
 Vue.use(VueGoogleMaps, {
   load: {
