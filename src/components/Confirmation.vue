@@ -70,7 +70,7 @@ export default {
   }
   .card {
     background: #EEC584;
-}
+  }
   .card-display {
     align-items: center;
     justify-content: center;

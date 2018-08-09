@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-4">
+  <div class="container-fluid">
     <h1 class="h1 text-center"><b>Bike Share Manager</b></h1>
     <hr>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
@@ -202,8 +202,8 @@ export default {
 }
 </script>
 <style>
-  .container-fluid.mt-4 {
-      background: #EEC584;
+  html, body {
+    background: #EEC584;
   }
   .card-body {
     background: #1B998B;
@@ -216,7 +216,7 @@ export default {
   }
   .card.listing {
     background: #EEC584;
-}
+  }
   .table {
     background-color: white;
   }
@@ -226,5 +226,5 @@ export default {
       border-collapse: separate;
       border-spacing: 4px;
       margin-bottom:10px;
-}
+  }
 </style>

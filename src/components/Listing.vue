@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-4">
+  <div class="container-fluid">
     <h1 class="h1 text-center"><b>Find Your Ride!</b></h1>
     <hr>
     <b-container>
@@ -199,8 +199,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   html, body {
+    background: #EEC584;
+  }
+  .container-fluid {
     background: #EEC584;
   }
   .bikeType {

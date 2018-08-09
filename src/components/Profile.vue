@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="profile">
     <br>
     <h1 class="h1 text-center"><b>Rented Bikes</b></h1><hr>
   <b-card-group deck class="mb-3">

@@ -41,6 +41,9 @@ body {
   margin: 0;
   background: #EEC584;
 }
+.container-fluid {
+  background: #eec584;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
