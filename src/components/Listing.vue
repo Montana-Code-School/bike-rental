@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <br>
     <h1 class="h1 text-center"><b>Find Your Ride!</b></h1>
     <hr>
     <b-container>

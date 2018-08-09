@@ -62,7 +62,7 @@ export default {
   html, body {
     background: #EEC584;
   }
-  .card-deck.mb-3 {
+  .profile {
     background: #EEC584;
   }
   .card-deck {

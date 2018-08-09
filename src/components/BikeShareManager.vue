@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <br>
     <h1 class="h1 text-center"><b>Bike Share Manager</b></h1>
     <hr>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
