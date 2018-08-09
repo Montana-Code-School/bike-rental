@@ -18,7 +18,16 @@
       <b-list-group-item>Price: ${{this.share.costToRent}}</b-list-group-item>
       <b-list-group-item>Pick up location: {{this.share.address}} {{this.share.city}}, MT
         <div id="google-map">
-          <bike-map :title="this.share"/>
+           <gmap-map
+              :center="center"
+              :zoom="12"
+              style="width:100%;  height: 400px;"
+            >
+            <gmap-marker
+              :position="google && new google.maps.LatLng(Number(share.lat), Number(share.lng))"
+            >
+            </gmap-marker>
+          </gmap-map>
         </div>
       </b-list-group-item>
       </b-list-group>
@@ -44,15 +53,20 @@
 <script>
 import api from '@/api'
 import BikeMap from '@/components/BikeMap'
+import {gmapApi} from 'vue2-google-maps'
 export default {
   name: 'App',
   data () {
     return {
-      share: []
+      share: {},
+      center: { lat: 46.8656618, lng: -113.97768149999999 }
     }
   },
   components: {
     BikeMap
+  },
+  computed: {
+    google: gmapApi
   },
   async created () {
     this.getBackShare()
