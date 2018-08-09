@@ -4,6 +4,7 @@
     <h1 class="h1 text-center"><b>Rented Bikes</b></h1><hr>
   <b-card-group deck class="mb-3">
     <b-card
+      bg-variant="info"
       v-for="share in shares"
       :key="share.id"
       :title="share.shortDescription"
@@ -71,9 +72,6 @@ export default {
     margin-left: 15px;
     margin-top: 15px;
     margin-bottom: 15px
-  }
-  .card {
-    background: #EEC584;
   }
   .card-deck .card {
     display: -ms-flexbox;

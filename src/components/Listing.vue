@@ -201,12 +201,6 @@ export default {
 </script>
 
 <style>
-  html, body {
-    background: #EEC584;
-  }
-  .container-fluid {
-    background: #EEC584;
-  }
   .bikeType {
     width: 100%;
   }

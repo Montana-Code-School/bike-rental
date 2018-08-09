@@ -25,8 +25,8 @@ export default {
     let url = ''
     if (bikeType && dateOne && dateTwo) {
       url = `/shares?bikeType=${bikeType}&dateOne=${dateOne}&dateTwo=${dateTwo}`
-    } else if (dateOne && dateTwo && isRented) {
-      url = `/shares?dateOne=${dateOne}&dateTwo=${dateTwo}&isRented=false`
+    } else if (dateOne && dateTwo) {
+      url = `/shares?dateOne=${dateOne}&dateTwo=${dateTwo}`
     } else if (bikeType) {
       url = `/shares?bikeType=${bikeType}`
     } else {
