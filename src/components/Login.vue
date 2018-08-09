@@ -61,7 +61,7 @@ export default {
     margin-right: 200px;
   }
   .card.card {
-    background: #EEC584;
+    background: #1B998B;
   }
   .error {
     color: red;

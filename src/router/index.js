@@ -8,8 +8,6 @@ import NexmoTest from '@/components/NexmoTest'
 import Confirmation from '@/components/Confirmation'
 import Profile from '@/components/Profile'
 import Login from '@/components/Login'
-import About from '@/components/About'
-import Dashboard from '@/components/Dashboard'
 import AuthTest from '@/components/AuthTest'
 
 Vue.use(Router)
@@ -65,15 +63,6 @@ let router = new Router({
       path: '/auth-test',
       name: 'AuthTest',
       component: AuthTest
-    },
-    {
-      path: '/about',
-      component: About
-    },
-    {
-      path: '/dashboard',
-      component: Dashboard,
-      beforeEnter: requireAuth
     },
     {
       path: '/login',
