@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div style="background: #eec584"
+  <div style="background: #eec584">
   <h1 class="h1 text-center"><b>Your Bike Is Confirmed</b></h1><hr>
   </div>
   <b-card-group deck class="mb-3">
