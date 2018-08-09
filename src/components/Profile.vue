@@ -62,6 +62,9 @@ export default {
   html, body {
     background: #EEC584;
   }
+  .card-deck.mb-3 {
+    background: #EEC584;
+  }
   .card-deck {
     display: flex;
     margin-right: 15px;
@@ -71,5 +74,14 @@ export default {
   }
   .card {
     background: #EEC584;
+  }
+  .card-deck .card {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
   }
 </style>

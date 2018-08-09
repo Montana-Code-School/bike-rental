@@ -5,12 +5,12 @@
       <b-navbar-brand to="/">Zootown Bike Share</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="/shares">Bike Share Manager</b-nav-item>
-          <b-nav-item to="/listings">Bike Listings</b-nav-item>
-          <b-nav-item to="/profile">Profile</b-nav-item>
-          <b-nav-item to="/login">Login</b-nav-item>
-          <b-nav-item to="/logout">Logout</b-nav-item>
+          <b-nav-item v-if="loggedIn" to="/">Home</b-nav-item>
+          <b-nav-item v-if="loggedIn" to="/shares">Bike Share Manager</b-nav-item>
+          <b-nav-item v-if="loggedIn" to="/listings">Bike Listings</b-nav-item>
+          <b-nav-item v-if="loggedIn" to="/profile">Profile</b-nav-item>
+          <b-nav-item v-if="!loggedIn" to="/login">Login</b-nav-item>
+          <b-nav-item v-if="loggedIn" to="/logout">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -25,12 +25,12 @@ export default {
   name: 'app',
   data () {
     return {
-      activeUser: !!localStorage.token
+      loggedIn: auth.loggedIn()
     }
   },
-  methods: {
-    switchActiveUser () {
-      this.activeUser = auth.loggedIn()
+  created () {
+    auth.onChange = loggedIn => {
+      this.loggedIn = loggedIn
     }
   }
 }

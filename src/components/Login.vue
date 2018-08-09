@@ -51,11 +51,17 @@ export default {
   html, body {
     background: #EEC584;
   }
+  h1.h1.text-center {
+    background: #EEC584;
+  }
   .card {
     align-items: center;
     background-color: #1B998B;
     margin-left: 200px;
     margin-right: 200px;
+  }
+  .card.card {
+    background: #EEC584;
   }
   .error {
     color: red;
