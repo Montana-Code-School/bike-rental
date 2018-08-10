@@ -38,14 +38,12 @@ export default {
   methods: {
     // receives a place object via the autocomplete component
     addMarker () {
-      if (this.title) {
-        const marker = {
-          lat: Number(this.title.lat),
-          lng: Number(this.title.lng)
-        }
-        this.markers.push({ position: marker })
-        this.center = marker
+      const marker = {
+        lat: Number(46.8564099),
+        lng: Number(-113.9878323)
       }
+      this.markers.push({ position: marker })
+      this.center = marker
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
